@@ -13,10 +13,11 @@ Web app percuma untuk melihat **waktu solat JAKIM** mengikut zon dan membaca **w
 - Kesan zon automatik melalui lokasi (GPS)
 - Data disimpan dalam peranti; mod anggaran jika tiada internet
 
-**Bacaan Selepas Solat**
-- 15 bacaan wirid: istighfar, tahlil, doa, Al-Fatihah, Ayat al-Kursi, 3 Qul, tasbih/tahmid/takbir 33×, doa penutup
-- Teks Arab, rumi dan maksud (boleh tunjuk/sembunyi)
-- Butang kiraan bagi setiap bacaan, saiz tulisan Arab boleh diubah
+**Bacaan** (teks Arab, rumi & maksud; saiz huruf boleh diubah)
+- **Jawab Azan** — jawapan setiap lafaz azan, selawat dan doa selepas azan
+- **Wirid** — 15 bacaan wirid selepas solat yang lazim di Malaysia, dengan pembilang
+- **Zikir Sunnah** — zikir & doa selepas solat berdasarkan hadis, dengan sumber riwayat
+- **Dalam Solat** — bacaan niat hingga salam mengikut turutan, beserta maksud
 
 ## Sokong app ini ❤️
 

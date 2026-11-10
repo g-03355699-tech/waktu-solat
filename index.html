@@ -1,527 +1,248 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waktu Solat & Wirid — waktu solat JAKIM dan bacaan selepas solat</title>
+<meta name="description" content="Web app percuma: waktu solat rasmi JAKIM untuk semua zon di Malaysia, kiraan detik ke waktu seterusnya, dan bacaan wirid selepas solat dengan pembilang tasbih.">
+<meta property="og:title" content="Waktu Solat & Wirid">
+<meta property="og:description" content="Waktu solat JAKIM mengikut zon + bacaan wirid selepas solat dengan pembilang tasbih. Percuma, boleh dipasang di telefon.">
+<meta property="og:image" content="https://g-03355699-tech.github.io/waktu-solat/skrin-1.jpg">
 <meta name="theme-color" content="#0f2a2a">
-<meta name="description" content="Waktu solat JAKIM mengikut zon dan bacaan wirid selepas solat dengan pembilang tasbih.">
-<title>Waktu Solat & Wirid</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="apple-touch-icon" href="app/ikon-180.png">
+<link rel="icon" type="image/svg+xml" href="app/ikon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0f2a2a; --bg2:#133434; --card:#173d3c; --line:#24504e;
-  --ink:#f3ede0; --muted:#a9bdb6; --gold:#d9b46a; --gold2:#f0d79a; --ok:#7fd1a8;
-  --ar:1.9rem;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-body{min-height:100vh;background:
-  radial-gradient(1200px 500px at 50% -200px,#1d4a47 0%,transparent 70%),var(--bg)}
-.wrap{max-width:720px;margin:0 auto;padding:16px 16px 96px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 14px}
-.brand{display:flex;align-items:center;gap:10px}
-.brand svg{width:30px;height:30px}
-.brand h1{font-size:1.05rem;font-weight:700;letter-spacing:.2px}
-.brand small{display:block;color:var(--muted);font-weight:500;font-size:.75rem}
-.clock{font-variant-numeric:tabular-nums;color:var(--gold2);font-weight:600;font-size:.95rem}
-
-.notice{display:none;background:#3a3218;border:1px solid #6b5a2a;color:#f3e2b4;padding:10px 12px;border-radius:12px;font-size:.82rem;margin-bottom:12px;line-height:1.45}
-.notice.show{display:block}
-
-/* hero */
-.hero{background:linear-gradient(160deg,#1f4f4b,#163a39);border:1px solid var(--line);border-radius:22px;padding:22px 20px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;border:1px solid rgba(217,180,106,.18);box-shadow:0 0 0 30px rgba(217,180,106,.05),0 0 0 60px rgba(217,180,106,.03)}
-.dates{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;color:var(--muted);font-size:.85rem}
-.dates b{color:var(--ink);font-weight:600}
-.next-label{margin-top:18px;font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px}
-.next-name{font-size:2rem;font-weight:700;margin-top:2px}
-.next-name span{color:var(--gold);font-weight:600;font-size:1.1rem;margin-left:8px}
-.countdown{font-size:2.6rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--gold2);letter-spacing:1px;margin-top:4px}
-.zone-row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;position:relative;z-index:1}
-select,.btn{font:inherit;font-size:.85rem;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);padding:10px 12px}
-select{flex:1;min-width:0}
-.btn{cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
-.btn:hover{border-color:var(--gold)}
-.btn.gold{background:var(--gold);color:#1b1608;border-color:var(--gold);font-weight:600}
-
-/* times */
-.times{margin-top:16px;display:grid;gap:8px}
-.t{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
-.t .n{font-weight:600}
-.t .n small{display:block;color:var(--muted);font-weight:400;font-size:.75rem;font-family:Amiri,serif;font-size:1rem}
-.t .v{font-variant-numeric:tabular-nums;font-size:1.25rem;font-weight:600}
-.t.minor{background:transparent;padding:8px 16px}
-.t.minor .n,.t.minor .v{color:var(--muted);font-size:.95rem;font-weight:500}
-.t.past .v,.t.past .n{opacity:.55}
-.t.now{border-color:var(--gold);background:linear-gradient(90deg,rgba(217,180,106,.18),var(--card) 60%)}
-.t.now .v{color:var(--gold2)}
-.t .tag{font-size:.68rem;background:var(--gold);color:#1b1608;padding:2px 8px;border-radius:99px;margin-left:8px;font-weight:700;vertical-align:middle}
-
-.section-h{display:flex;justify-content:space-between;align-items:center;margin:26px 2px 10px}
-.section-h h2{font-size:1rem}
-.month{overflow-x:auto;border:1px solid var(--line);border-radius:16px;display:none}
-.month.show{display:block}
-table{border-collapse:collapse;width:100%;font-size:.8rem;font-variant-numeric:tabular-nums}
-th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
-th{background:var(--bg2);color:var(--gold2);font-weight:600;position:sticky;top:0}
-tr.today td{background:rgba(217,180,106,.15);color:var(--gold2);font-weight:600}
-.src{color:var(--muted);font-size:.75rem;margin-top:12px;text-align:center;line-height:1.5}
-.src a{color:var(--gold)}
-
-/* wirid */
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;position:sticky;top:8px;z-index:5}
-.toolbar .grow{flex:1}
-.chip{font:inherit;font-size:.8rem;padding:7px 11px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
-.chip.on{background:var(--gold);border-color:var(--gold);color:#1b1608;font-weight:600}
-.progress-all{height:6px;border-radius:99px;background:var(--bg2);overflow:hidden;margin:12px 2px 4px}
-.progress-all i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width .3s}
-.pmeta{font-size:.78rem;color:var(--muted);margin:0 2px 10px}
-.w{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:12px;transition:border-color .3s,opacity .3s}
-.w.done{border-color:rgba(127,209,168,.5)}
-.w.done .ar{opacity:.65}
-.w-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-.w-title{font-weight:700;font-size:.95rem}
-.w-note{color:var(--muted);font-size:.75rem;margin-top:3px}
-.num{width:28px;height:28px;flex:none;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-size:.75rem;font-weight:700}
-.ar{font-family:Amiri,serif;font-size:var(--ar);line-height:2.15;direction:rtl;text-align:right;margin:14px 0 6px;color:#fffaf0}
-.rumi{font-style:italic;color:var(--gold2);font-size:.92rem;line-height:1.6;margin-top:6px}
-.maksud{color:var(--muted);font-size:.88rem;line-height:1.6;margin-top:8px}
-body.no-rumi .rumi{display:none}
-body.no-maksud .maksud{display:none}
-.counter{margin-top:14px;display:flex;align-items:center;gap:12px}
-.tap{flex:1;font:inherit;font-weight:700;font-size:1rem;padding:14px;border-radius:14px;border:1px solid var(--gold);background:rgba(217,180,106,.1);color:var(--gold2);cursor:pointer;user-select:none;position:relative;overflow:hidden;font-variant-numeric:tabular-nums}
-.tap:active{transform:scale(.985)}
-.tap .bar{position:absolute;left:0;top:0;bottom:0;background:rgba(217,180,106,.22);width:0;transition:width .2s}
-.tap span{position:relative}
-.w.done .tap{border-color:var(--ok);color:var(--ok);background:rgba(127,209,168,.08)}
-.w.done .tap .bar{background:rgba(127,209,168,.15)}
-.mini{font:inherit;font-size:.8rem;background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:12px;padding:12px;cursor:pointer}
-
-/* nav */
-nav{position:fixed;left:0;right:0;bottom:0;background:rgba(15,42,42,.92);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:center;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));z-index:10}
-nav button{flex:1;max-width:240px;font:inherit;font-weight:600;font-size:.88rem;padding:12px;border-radius:14px;border:1px solid transparent;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-nav button.on{background:var(--card);border-color:var(--line);color:var(--gold2)}
-nav svg{width:18px;height:18px}
-.view{display:none}.view.on{display:block}
-.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--muted);border-top-color:transparent;border-radius:50%;animation:s 1s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-/* pembangun & derma */
-.pembangun{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.pembangun .maklumat{flex:1;min-width:180px;font-size:.82rem;color:var(--muted);line-height:1.55}
-.pembangun .maklumat b{color:var(--ink);font-size:.95rem}
-.pembangun .maklumat a{color:var(--gold2);text-decoration:none;font-weight:500;display:inline-flex;align-items:center;gap:5px}
-.btn-derma{display:inline-flex;align-items:center;gap:8px;background:#f2a600;color:#1b1f24;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:700;font-size:.92rem;cursor:pointer}
-.btn-derma:hover{background:#e09a00}
-.btn-derma svg{width:18px;height:18px;fill:currentColor}
-.modal{position:fixed;inset:0;background:rgba(5,15,15,.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
-.modal.show{display:flex}
-.modal .kotak{background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:22px 20px;max-width:380px;width:100%;text-align:center;max-height:92vh;overflow:auto}
-.modal h3{font-size:1.15rem;margin-bottom:8px}
-.modal p{color:var(--muted);font-size:.86rem;line-height:1.55}
-.modal img{width:100%;max-width:240px;border-radius:14px;margin:14px auto 6px;display:block;background:#fff}
-.modal .nama{color:var(--ink);font-weight:600;margin-top:10px}
-.modal .btn-wa{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:14px;background:#25d366;color:#08240f;border-radius:12px;padding:12px;font-weight:700;text-decoration:none;font-size:.9rem}
-.modal .btn-wa svg{width:18px;height:18px;fill:currentColor}
-.modal .tutup{width:100%;margin-top:10px;justify-content:center}
-@media (max-width:420px){.countdown{font-size:2.2rem}.next-name{font-size:1.7rem}}
+:root{--bg:#0f2a2a;--bg2:#133434;--card:#173d3c;--line:#24504e;--ink:#f3ede0;--muted:#a9bdb6;--gold:#d9b46a;--gold2:#f0d79a;--wa:#25d366}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+a{color:var(--gold2)}
+svg.ik{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.bekas{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero{background:radial-gradient(900px 420px at 80% -10%,#24605a 0%,transparent 70%),linear-gradient(170deg,#1a4643,#0f2a2a);padding:52px 0 68px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero::after{content:"";position:absolute;right:-110px;top:-110px;width:380px;height:380px;border-radius:50%;border:1px solid rgba(217,180,106,.18);box-shadow:0 0 0 40px rgba(217,180,106,.05),0 0 0 80px rgba(217,180,106,.03)}
+.hero .grid{display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:center;position:relative;z-index:1}
+.logo{width:72px;height:72px;border-radius:18px;margin-bottom:16px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.basmalah{font-family:Amiri,serif;color:var(--gold);font-size:1.35rem;margin:0 0 6px;direction:rtl;text-align:left}
+.hero h1{font-size:clamp(1.9rem,5vw,2.8rem);line-height:1.15;margin:0 0 12px}
+.versi{font-size:.75rem;font-weight:600;background:rgba(217,180,106,.18);color:var(--gold2);padding:3px 10px;border-radius:999px;vertical-align:middle;white-space:nowrap}
+.hero p.lead{font-size:1.02rem;color:#d7e2dd;margin:0 0 26px;max-width:560px}
+.butang{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#1b1608;font-weight:700;font-size:1.08rem;padding:15px 30px;border-radius:14px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .15s}
+.butang:hover{transform:translateY(-2px)}
+.butang.sekunder{background:transparent;color:var(--ink);border:1.5px solid rgba(243,237,224,.35);box-shadow:none;font-size:.95rem;padding:13px 22px;font-weight:600}
+.aksi{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.kecil-hero{font-size:.8rem;color:var(--muted);margin-top:14px}
+.qr{background:#fff;border-radius:20px;padding:18px;text-align:center;color:#1b1f24;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.qr #kodQr svg{width:100%;max-width:200px;height:auto;display:block;margin:0 auto}
+.qr small{display:block;color:#5f6670;margin-top:6px;font-size:.8rem}
+section{padding:56px 0}
+h2{font-size:1.6rem;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 28px}
+.grid-ciri{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ciri,.kotak,.l,.soalan,.pembangun{background:var(--card);border:1px solid var(--line);border-radius:18px}
+.ciri{padding:20px}
+.ciri svg.ik{color:var(--gold);width:30px;height:30px}
+.ciri h3{font-size:1rem;margin:10px 0 4px}
+.ciri p{margin:0;font-size:.88rem;color:var(--muted)}
+.skrin{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.skrin figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:10px}
+.skrin img{width:100%;border-radius:14px;display:block}
+.skrin figcaption{font-size:.82rem;color:var(--muted);text-align:center;margin-top:8px}
+.dua{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kotak{padding:20px}
+.kotak h3{margin:0 0 10px;font-size:1rem;display:flex;align-items:center;gap:8px}
+.kotak h3 svg.ik{color:var(--gold)}
+.kotak ol{margin:0;padding-left:20px;font-size:.92rem;color:#d7e2dd}
+.kotak li{margin-bottom:6px}
+.kotak b{color:var(--gold2)}
+.nota{background:#3a3218;border:1px solid #6b5a2a;color:#f3e2b4;border-radius:14px;padding:12px 14px;font-size:.88rem;margin-top:16px}
+.langkah{counter-reset:l;display:grid;gap:14px}
+.l{padding:20px 20px 20px 70px;position:relative}
+.l::before{counter-increment:l;content:counter(l);position:absolute;left:20px;top:20px;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-weight:700;display:flex;align-items:center;justify-content:center}
+.l h3{margin:0 0 4px;font-size:1rem}.l p{margin:0;color:var(--muted);font-size:.92rem}
+.l b{color:var(--ink)}
+.soalan{padding:6px 20px}
+details{border-bottom:1px solid var(--line);padding:14px 0}
+details:last-child{border-bottom:0}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin:8px 0 0;color:var(--muted);font-size:.92rem}
+code{background:var(--bg2);padding:1px 6px;border-radius:5px;font-size:.85em}
+.pembangun{padding:22px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.pembangun img{width:170px;border-radius:14px;background:#fff}
+.pembangun .m{flex:1;min-width:220px;font-size:.92rem;color:var(--muted)}
+.pembangun .m b{color:var(--ink)}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#08240f;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:12px;margin-top:10px}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:30px 20px 50px;border-top:1px solid var(--line)}
+@media (max-width:760px){.hero .grid{grid-template-columns:1fr}.qr{display:none}.grid-ciri{grid-template-columns:1fr 1fr}.skrin{grid-template-columns:1fr 1fr}.skrin figure:last-child{display:none}.dua{grid-template-columns:1fr}}
+@media (max-width:480px){.grid-ciri{grid-template-columns:1fr}.butang{width:100%;justify-content:center}.l{padding-left:20px;padding-top:66px}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="brand">
-      <svg viewBox="0 0 32 32" fill="none"><path d="M20.5 4.5a11.5 11.5 0 1 0 7 20.6A12.5 12.5 0 0 1 20.5 4.5Z" fill="#d9b46a"/><path d="m23 9 1 2.3 2.4.2-1.8 1.6.6 2.4L23 14.2l-2.2 1.3.6-2.4-1.8-1.6 2.4-.2L23 9Z" fill="#f0d79a"/></svg>
-      <div><h1>Waktu Solat & Wirid</h1><small id="zoneShort">—</small></div>
+<svg width="0" height="0" style="position:absolute">
+<symbol id="i-jam" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-peta" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+<symbol id="i-kalendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+<symbol id="i-buku" viewBox="0 0 24 24"><path d="M2 5c3-1.5 6.5-1.5 10 1v14c-3.5-2.5-7-2.5-10-1z"/><path d="M22 5c-3-1.5-6.5-1.5-10 1v14c3.5-2.5 7-2.5 10-1z"/></symbol>
+<symbol id="i-tasbih" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1.6"/><circle cx="17.3" cy="6.7" r="1.6"/><circle cx="19.5" cy="12" r="1.6"/><circle cx="17.3" cy="17.3" r="1.6"/><circle cx="6.7" cy="6.7" r="1.6"/><circle cx="4.5" cy="12" r="1.6"/><circle cx="6.7" cy="17.3" r="1.6"/><path d="M12 19.5v2.5"/><circle cx="12" cy="19" r="1.6"/></symbol>
+<symbol id="i-azan" viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></symbol>
+<symbol id="i-hadis" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 11h7M9 15h7M9 19h4"/></symbol>
+<symbol id="i-sejadah" viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M9 21.5v-7a3 3 0 0 1 6 0v7M9 6.5h6"/></symbol>
+<symbol id="i-huruf" viewBox="0 0 24 24"><path d="M4 19l5-14 5 14M6 14h6"/><path d="M15 12h6M18 9v6"/></symbol>
+<symbol id="i-luar" viewBox="0 0 24 24"><path d="M2 8.5a15 15 0 0 1 20 0M5.5 12a10 10 0 0 1 13 0M9 15.5a5 5 0 0 1 6 0"/><path d="M3 3l18 18"/></symbol>
+<symbol id="i-kunci" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+<symbol id="i-telefon" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+<symbol id="i-komputer" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9.2 8.6c-.4 2.9 2.8 6.4 6 6.3l.9-1.5-1.9-1-1 .7a4 4 0 0 1-2-2l.7-1-1-1.9z"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="bekas">
+    <div class="grid">
+      <div>
+        <img class="logo" src="app/ikon-192.png" alt="">
+        <p class="basmalah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+        <h1>Waktu Solat &amp; Wirid <span class="versi">v1.0</span></h1>
+        <p class="lead">Waktu solat <b>rasmi JAKIM</b> untuk semua zon di Malaysia, kiraan detik ke waktu seterusnya, doa menjawab azan, <b>wirid dan zikir sunnah selepas solat</b>, serta bacaan di dalam solat — lengkap dengan teks Arab, rumi, maksud dan pembilang tasbih. <b>Percuma</b>, tiada log masuk, dan boleh dipasang di skrin utama telefon.</p>
+        <div class="aksi">
+          <a class="butang" href="app/">Buka App →</a>
+          <a class="butang sekunder" href="#pasang">Cara pasang di telefon</a>
+        </div>
+        <div class="kecil-hero">Data waktu solat: JAKIM e-Solat melalui api.waktusolat.app · Semua tetapan disimpan dalam telefon anda sahaja.</div>
+      </div>
+      <div class="qr"><div id="kodQr"></div><small>Imbas dengan kamera telefon untuk buka app</small></div>
     </div>
-    <div class="clock" id="clock">--:--:--</div>
-  </header>
+  </div>
+</header>
 
-  <div class="notice" id="notice"></div>
+<section>
+  <div class="bekas">
+    <h2>Pengenalan</h2>
+    <p class="sub">Satu app ringkas dengan lima tab: <b>Waktu Solat</b>, <b>Jawab Azan</b>, <b>Wirid</b>, <b>Zikir Sunnah</b> dan <b>Dalam Solat</b> — tahu bila masuk waktu, dan amalkan bacaan sebelum, semasa dan selepas solat tanpa perlu membawa buku atau tasbih.</p>
+    <div class="grid-ciri">
+      <div class="ciri"><svg class="ik"><use href="#i-jam"/></svg><h3>Waktu solat JAKIM</h3><p>Imsak, Subuh, Syuruk, Dhuha, Zohor, Asar, Maghrib dan Isyak bagi zon pilihan, dengan waktu semasa ditanda <b>SEKARANG</b>.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-jam"/></svg><h3>Kiraan detik</h3><p>Paparan besar baki masa ke waktu solat seterusnya, termasuk Subuh esok selepas Isyak.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-peta"/></svg><h3>Semua zon &amp; GPS</h3><p>Pilih daripada 60 zon JAKIM di seluruh Malaysia, atau tekan <b>Lokasi</b> untuk mengesan zon anda secara automatik.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-kalendar"/></svg><h3>Hijri &amp; jadual bulanan</h3><p>Tarikh Hijri dan Masihi hari ini, serta jadual waktu solat sebulan penuh dengan hari ini diserlahkan.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-azan"/></svg><h3>Doa menjawab azan</h3><p>Jawapan bagi setiap lafaz azan, termasuk Subuh, serta selawat dan doa selepas azan beserta sumber hadis.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-buku"/></svg><h3>15 bacaan wirid</h3><p>Istighfar, tahlil, doa, Al-Fatihah, Ayat al-Kursi, tiga Qul, tasbih, tahmid, takbir dan doa penutup — mengikut susunan.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-hadis"/></svg><h3>Zikir sunnah berdasarkan hadis</h3><p>15 zikir dan doa selepas solat yang diajar Rasulullah ﷺ — setiap satu dengan sumber riwayat dan kelebihannya.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-sejadah"/></svg><h3>Bacaan di dalam solat</h3><p>Niat, takbir, iftitah, Al-Fatihah, rukuk, iktidal, sujud, tahiyat hingga salam — mengikut turutan dengan maksud.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-tasbih"/></svg><h3>Pembilang tasbih</h3><p>Ketik butang setiap kali selesai satu bacaan. Telefon bergetar apabila cukup bilangan dan terus ke bacaan seterusnya.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-huruf"/></svg><h3>Rumi, maksud &amp; saiz huruf</h3><p>Tunjuk atau sembunyi rumi dan maksud, serta besarkan tulisan Arab supaya selesa dibaca.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-luar"/></svg><h3>Tanpa internet</h3><p>Selepas dibuka sekali, jadual bulan semasa disimpan dalam telefon. Wirid boleh dibaca walaupun tiada liputan.</p></div>
+      <div class="ciri"><svg class="ik"><use href="#i-kunci"/></svg><h3>Privasi</h3><p>Tiada akaun dan tiada pengumpulan data. Zon, tetapan dan kiraan wirid disimpan dalam pelayar telefon anda sahaja.</p></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ============ WAKTU SOLAT ============ -->
-  <section class="view on" id="v-solat">
-    <div class="hero">
-      <div class="dates"><b id="dHijri">—</b><span id="dMasihi">—</span></div>
-      <div class="next-label" id="nextLabel">Waktu seterusnya</div>
-      <div class="next-name" id="nextName">—<span id="nextTime"></span></div>
-      <div class="countdown" id="countdown">--:--:--</div>
-      <div class="zone-row">
-        <select id="zone" aria-label="Pilih zon"></select>
-        <button class="btn" id="gps" title="Kesan lokasi saya">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7"/></svg>Lokasi
-        </button>
+<section style="padding-top:0">
+  <div class="bekas">
+    <div class="skrin">
+      <figure><img src="skrin-1.jpg" alt="Paparan waktu solat dengan kiraan detik" loading="lazy"><figcaption>Waktu solat &amp; kiraan detik</figcaption></figure>
+      <figure><img src="skrin-2.jpg" alt="Doa menjawab azan" loading="lazy"><figcaption>Doa menjawab azan</figcaption></figure>
+      <figure><img src="skrin-3.jpg" alt="Zikir sunnah dengan pembilang tasbih" loading="lazy"><figcaption>Zikir sunnah &amp; pembilang tasbih</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="pasang" style="padding-top:0">
+  <div class="bekas">
+    <h2>Cara pemasangan</h2>
+    <p class="sub">Pasang di skrin utama supaya boleh dibuka seperti app biasa — tanpa Play Store atau App Store, dan tanpa akaun.</p>
+    <div class="dua">
+      <div class="kotak">
+        <h3><svg class="ik"><use href="#i-telefon"/></svg>Android (Chrome)</h3>
+        <ol>
+          <li>Buka <a href="app/">app</a> dalam Chrome.</li>
+          <li>Tekan menu <b>⋮</b> di penjuru kanan atas.</li>
+          <li>Pilih <b>Install app</b> atau <b>Add to Home screen</b> (Tambah ke skrin utama).</li>
+          <li>Tekan <b>Install</b>. Ikon bulan sabit akan muncul di skrin utama.</li>
+        </ol>
+      </div>
+      <div class="kotak">
+        <h3><svg class="ik"><use href="#i-telefon"/></svg>iPhone / iPad (Safari)</h3>
+        <ol>
+          <li>Buka <a href="app/">app</a> dalam Safari.</li>
+          <li>Tekan butang <b>Kongsi</b> (petak dengan anak panah ke atas).</li>
+          <li>Skrol ke bawah dan pilih <b>Add to Home Screen</b> (Tambah ke Skrin Utama).</li>
+          <li>Pastikan <b>Open as Web App</b> dihidupkan, kemudian tekan <b>Add</b>.</li>
+        </ol>
+      </div>
+      <div class="kotak">
+        <h3><svg class="ik"><use href="#i-komputer"/></svg>Komputer (Chrome / Edge)</h3>
+        <ol>
+          <li>Buka <a href="app/">app</a>.</li>
+          <li>Klik ikon <b>Install</b> (⊕) di hujung kanan bar alamat.</li>
+          <li>Klik <b>Install</b>. App dibuka dalam tetingkap sendiri dan boleh dipin ke taskbar.</li>
+        </ol>
       </div>
     </div>
-
-    <div class="times" id="times"></div>
-
-    <div class="section-h">
-      <h2 id="monthTitle">Jadual Bulanan</h2>
-      <button class="btn" id="toggleMonth">Tunjuk</button>
-    </div>
-    <div class="month" id="month"></div>
-
-    <p class="src" id="src">Sumber data: JAKIM e-Solat melalui <a href="https://api.waktusolat.app" target="_blank" rel="noopener">api.waktusolat.app</a></p>
-  </section>
-
-  <!-- ============ WIRID ============ -->
-  <section class="view" id="v-wirid">
-    <div class="toolbar">
-      <button class="chip on" id="tRumi">Rumi</button>
-      <button class="chip on" id="tMaksud">Maksud</button>
-      <span class="grow"></span>
-      <button class="chip" id="fMinus" aria-label="Kecilkan tulisan">A−</button>
-      <button class="chip" id="fPlus" aria-label="Besarkan tulisan">A+</button>
-      <button class="chip" id="resetAll">Set semula</button>
-    </div>
-    <div class="progress-all"><i id="pAll"></i></div>
-    <div class="pmeta" id="pMeta">0 daripada 0 selesai</div>
-    <div id="wirid"></div>
-    <p class="src">Ketik butang kiraan setiap kali selesai satu bacaan. Bilangan ulangan mengikut amalan wirid yang lazim di Malaysia; ikutlah bimbingan guru atau imam setempat.</p>
-  </section>
-
-  <!-- Pembangun & derma -->
-  <div class="pembangun">
-    <div class="maklumat">
-      Dibangunkan oleh<br><b id="pNama"></b><br>
-      <a id="pTelefon" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.4-.9-2.8-1.2-4.6-4.1-4.8-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg><span></span></a>
-    </div>
-    <button class="btn-derma" id="btnDerma"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>Derma</button>
+    <div class="nota">Selepas dipasang, buka app sekali ketika ada internet supaya jadual waktu solat bulan ini disimpan dalam telefon. Jika ditanya, benarkan akses <b>lokasi</b> untuk mengesan zon secara automatik — atau pilih zon sendiri.</div>
   </div>
-</div>
+</section>
 
-<!-- Modal derma -->
-<div class="modal" id="modalDerma" role="dialog" aria-modal="true" aria-labelledby="dTajuk">
-  <div class="kotak">
-    <h3 id="dTajuk">Sokong app ini ❤️</h3>
-    <p>App ini percuma. Jika ia membantu anda, sumbangan anda membantu penyelenggaraan dan ciri baharu.</p>
-    <img src="derma-qr.png" alt="QR DuitNow Maybank untuk derma" loading="lazy">
-    <p>Tangkap layar kod QR ini, kemudian imbas melalui app bank atau e-wallet (DuitNow QR).</p>
-    <p class="nama">Derma kepada: <span id="dNama"></span></p>
-    <a class="btn-wa" id="dWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.4-.9-2.8-1.2-4.6-4.1-4.8-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.3Z"/></svg>Hubungi melalui WhatsApp</a>
-    <button class="btn tutup" id="dTutup">Tutup</button>
+<section style="padding-top:0">
+  <div class="bekas">
+    <h2>Cara menggunakan</h2>
+    <p class="sub">Empat langkah mudah.</p>
+    <div class="langkah">
+      <div class="l"><h3>Tetapkan zon</h3><p>Pada tab <b>Waktu Solat</b>, pilih zon JAKIM anda daripada senarai atau tekan <b>Lokasi</b>. Zon ini diingati untuk kali seterusnya.</p></div>
+      <div class="l"><h3>Lihat waktu &amp; kiraan detik</h3><p>Kad atas menunjukkan waktu solat seterusnya dan baki masanya. Tekan <b>Tunjuk</b> pada Jadual Bulanan untuk melihat waktu sebulan.</p></div>
+      <div class="l"><h3>Pilih bacaan</h3><p>Ketika azan, buka tab <b>Jawab Azan</b>. Selepas solat, pilih <b>Wirid</b> (amalan lazim di Malaysia) atau <b>Zikir Sunnah</b> (berdasarkan hadis) dan ketik butang kiraan — app akan ke bacaan seterusnya apabila cukup bilangannya. Tab <b>Dalam Solat</b> sesuai untuk belajar dan menyemak bacaan solat.</p></div>
+      <div class="l"><h3>Laraskan paparan</h3><p>Guna <b>Rumi</b> dan <b>Maksud</b> untuk tunjuk/sembunyi terjemahan, <b>A−/A+</b> untuk saiz huruf Arab, dan <b>↺ Semula</b> untuk mula semula selepas solat seterusnya.</p></div>
+    </div>
   </div>
-</div>
+</section>
 
-<nav>
-  <button class="on" data-v="solat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Waktu Solat</button>
-  <button data-v="wirid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></svg>Bacaan Wirid</button>
-</nav>
+<section style="padding-top:0">
+  <div class="bekas">
+    <h2>Soalan lazim</h2>
+    <p class="sub">&nbsp;</p>
+    <div class="soalan">
+      <details><summary>Dari mana data waktu solat diambil?</summary><p>Daripada laman e-Solat JAKIM, melalui perkhidmatan awam <a href="https://api.waktusolat.app" target="_blank" rel="noopener">api.waktusolat.app</a>. Waktu yang dipaparkan sama dengan jadual rasmi JAKIM bagi zon tersebut.</p></details>
+      <details><summary>Apakah maksud notis “Mod anggaran”?</summary><p>Notis ini muncul jika app tidak dapat menghubungi pelayan waktu solat dan belum ada data tersimpan. Waktu dikira sendiri dalam telefon menggunakan parameter JAKIM, dan mungkin berbeza ±1–2 minit. Sambung ke internet dan buka semula app untuk mendapatkan waktu rasmi.</p></details>
+      <details><summary>Zon yang dikesan oleh butang Lokasi tidak tepat.</summary><p>Pilih zon yang betul secara manual daripada senarai. Pilihan anda akan disimpan dan digunakan seterusnya.</p></details>
+      <details><summary>Adakah lokasi saya disimpan?</summary><p>Tidak. Koordinat hanya dihantar ke api.waktusolat.app sekali untuk menentukan zon JAKIM. App ini tidak mempunyai pelayan sendiri dan tidak menyimpan lokasi anda di mana-mana.</p></details>
+      <details><summary>Bilakah kiraan wirid bermula semula?</summary><p>Kiraan disimpan sepanjang hari dan bermula semula secara automatik setiap hari baharu. Tekan <b>↺ Semula</b> untuk mengosongkan semua kiraan, atau ↺ pada satu bacaan sahaja.</p></details>
+      <details><summary>Bilangan bacaan berbeza dengan amalan di masjid saya.</summary><p>Bilangan dalam app mengikut amalan wirid yang lazim di Malaysia. Ikutlah bimbingan guru atau imam setempat. Jika terdapat kesilapan pada teks Arab, rumi atau maksud, mohon maklumkan melalui WhatsApp di bawah.</p></details>
+      <details><summary>Bagaimana mengemas kini app?</summary><p>Tiada apa yang perlu dibuat. Setiap kali dibuka dengan internet, app akan memuatkan versi terkini secara automatik.</p></details>
+    </div>
+  </div>
+</section>
 
+<section style="padding-top:0">
+  <div class="bekas">
+    <div class="pembangun">
+      <img src="derma-qr.png" alt="QR DuitNow untuk derma">
+      <div class="m">
+        <b style="font-size:1.05rem">Sokong app ini ❤️</b><br>
+        Waktu Solat &amp; Wirid adalah percuma. Jika ia memberi manfaat kepada anda, sumbangan melalui DuitNow QR membantu penyelenggaraan dan ciri baharu. Tangkap layar kod QR, kemudian imbas melalui app bank atau e-wallet.<br>
+        <b>Derma kepada: Ibrahim bin Kadri</b><br>
+        <a class="btn-wa" href="https://wa.me/60193002591?text=Salam%2C%20saya%20ingin%20bertanya%20tentang%20app%20Waktu%20Solat%20%26%20Wirid." target="_blank" rel="noopener"><svg class="ik" style="width:18px;height:18px"><use href="#i-wa"/></svg>019-300 2591 (WhatsApp)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>Dibangunkan oleh <b>Ibrahim bin Kadri</b> · Lesen <a href="https://github.com/g-03355699-tech/waktu-solat/blob/main/LICENSE">MIT</a> · <a href="https://github.com/g-03355699-tech/waktu-solat">Kod sumber</a></footer>
+
+<script src="qrcode.js"></script>
 <script>
-/* ---------------- Storage (selamat jika tidak tersedia) ---------------- */
-const store={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
-             set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-
-const TZ='Asia/Kuala_Lumpur';
-const API='https://api.waktusolat.app';
-
-/* ---------------- Zon JAKIM ---------------- */
-const ZONES={
- "Johor":[["JHR01","Pulau Aur dan Pulau Pemanggil"],["JHR02","Johor Bahru, Kota Tinggi, Mersing, Kulai"],["JHR03","Kluang, Pontian"],["JHR04","Batu Pahat, Muar, Segamat, Gemas Johor, Tangkak"]],
- "Kedah":[["KDH01","Kota Setar, Kubang Pasu, Pokok Sena"],["KDH02","Kuala Muda, Yan, Pendang"],["KDH03","Padang Terap, Sik"],["KDH04","Baling"],["KDH05","Bandar Baharu, Kulim"],["KDH06","Langkawi"],["KDH07","Puncak Gunung Jerai"]],
- "Kelantan":[["KTN01","Bachok, Kota Bharu, Machang, Pasir Mas, Pasir Puteh, Tanah Merah, Tumpat, Kuala Krai, Mukim Chiku"],["KTN02","Gua Musang, Jeli, Lojing"]],
- "Melaka":[["MLK01","Seluruh Negeri Melaka"]],
- "Negeri Sembilan":[["NGS01","Tampin, Jempol"],["NGS02","Jelebu, Kuala Pilah, Rembau"],["NGS03","Port Dickson, Seremban"]],
- "Pahang":[["PHG01","Pulau Tioman"],["PHG02","Kuantan, Pekan, Muadzam Shah"],["PHG03","Jerantut, Temerloh, Maran, Bera, Chenor, Jengka"],["PHG04","Bentong, Lipis, Raub"],["PHG05","Genting Sempah, Janda Baik, Bukit Tinggi"],["PHG06","Cameron Highlands, Genting Highlands, Bukit Fraser"],["PHG07","Rompin"]],
- "Perlis":[["PLS01","Kangar, Padang Besar, Arau"]],
- "Pulau Pinang":[["PNG01","Seluruh Negeri Pulau Pinang"]],
- "Perak":[["PRK01","Tapah, Slim River, Tanjung Malim"],["PRK02","Kuala Kangsar, Sg. Siput, Ipoh, Batu Gajah, Kampar"],["PRK03","Lenggong, Pengkalan Hulu, Grik"],["PRK04","Temengor, Belum"],["PRK05","Kg Gajah, Teluk Intan, Bagan Datuk, Seri Iskandar, Beruas, Parit, Lumut, Sitiawan, Pulau Pangkor"],["PRK06","Selama, Taiping, Bagan Serai, Parit Buntar"],["PRK07","Bukit Larut"]],
- "Sabah":[["SBH01","Sandakan (Timur), Bukit Garam, Semawang, Temanggong, Tambisan, Sukau"],["SBH02","Beluran, Telupid, Pinangah, Terusan, Kuamut, Sandakan (Barat)"],["SBH03","Lahad Datu, Silabukan, Kunak, Sahabat, Semporna, Tungku, Tawau (Timur)"],["SBH04","Bandar Tawau, Balong, Merotai, Kalabakan, Tawau (Barat)"],["SBH05","Kudat, Kota Marudu, Pitas, Pulau Banggi"],["SBH06","Gunung Kinabalu"],["SBH07","Kota Kinabalu, Ranau, Kota Belud, Tuaran, Penampang, Papar, Putatan"],["SBH08","Pensiangan, Keningau, Tambunan, Nabawan"],["SBH09","Beaufort, Kuala Penyu, Sipitang, Tenom, Long Pasia, Membakut, Weston"]],
- "Selangor":[["SGR01","Gombak, Petaling, Sepang, Hulu Langat, Hulu Selangor, Shah Alam"],["SGR02","Kuala Selangor, Sabak Bernam"],["SGR03","Klang, Kuala Langat"]],
- "Sarawak":[["SWK01","Limbang, Lawas, Sundar, Trusan"],["SWK02","Miri, Niah, Bekenu, Sibuti, Marudi"],["SWK03","Pandan, Belaga, Suai, Tatau, Sebauh, Bintulu"],["SWK04","Sibu, Mukah, Dalat, Song, Igan, Oya, Balingian, Kanowit, Kapit"],["SWK05","Sarikei, Matu, Julau, Rajang, Daro, Bintangor, Belawai"],["SWK06","Lubok Antu, Sri Aman, Roban, Debak, Kabong, Lingga, Engkelili, Betong, Spaoh, Pusa, Saratok"],["SWK07","Serian, Simunjan, Samarahan, Sebuyau, Meludam"],["SWK08","Kuching, Bau, Lundu, Sematan"],["SWK09","Zon Khas (Kampung Patarikan)"]],
- "Terengganu":[["TRG01","Kuala Terengganu, Marang, Kuala Nerus"],["TRG02","Besut, Setiu"],["TRG03","Hulu Terengganu"],["TRG04","Dungun, Kemaman"]],
- "Wilayah Persekutuan":[["WLY01","Kuala Lumpur, Putrajaya"],["WLY02","Labuan"]]
-};
-const zoneName=c=>{for(const s in ZONES)for(const [k,n] of ZONES[s])if(k===c)return n;return c};
-
-/* ---------------- Utiliti masa ---------------- */
-const pad=n=>String(n).padStart(2,'0');
-function klParts(d=new Date()){
-  const p=Object.fromEntries(new Intl.DateTimeFormat('en-GB',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(d).map(x=>[x.type,x.value]));
-  return {y:+p.year,m:+p.month,d:+p.day,h:+p.hour,mi:+p.minute,s:+p.second};
-}
-const fmtTime=ts=>new Date(ts*1000).toLocaleTimeString('ms-MY',{timeZone:TZ,hour:'numeric',minute:'2-digit',hour12:true}).replace(/\s?(pg|ptg)/i,m=>' '+m.trim().toLowerCase());
-const BULAN=['Januari','Februari','Mac','April','Mei','Jun','Julai','Ogos','September','Oktober','November','Disember'];
-const HARI=['Ahad','Isnin','Selasa','Rabu','Khamis','Jumaat','Sabtu'];
-const HIJRI=['Muharram','Safar','Rabiulawal','Rabiulakhir','Jamadilawal','Jamadilakhir','Rejab','Syaaban','Ramadan','Syawal','Zulkaedah','Zulhijjah'];
-function fmtHijri(h){
-  if(!h)return'';const m=String(h).match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
-  if(!m)return String(h);return `${+m[3]} ${HIJRI[+m[2]-1]} ${m[1]}H`;
-}
-function hijriIntl(){
-  try{const p=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{timeZone:TZ,day:'numeric',month:'numeric',year:'numeric'}).formatToParts(new Date()).map(x=>[x.type,x.value]));
-  return `${p.day} ${HIJRI[+p.month-1]} ${parseInt(p.year)}H`}catch(e){return''}
-}
-
-/* ---------------- Kiraan anggaran (sandaran luar talian) ----------------
-   Parameter JAKIM: Subuh 18°, Isyak 18°, Asar mazhab Syafie, ihtiyati +2 minit. */
-const rad=d=>d*Math.PI/180, deg=r=>r*180/Math.PI;
-function calcDay(y,m,d,lat,lng){
-  const jd=Date.UTC(y,m-1,d,12)/86400000+2440587.5 - lng/360;
-  const D=jd-2451545.0;
-  const g=(357.529+0.98560028*D)%360, q=(280.459+0.98564736*D)%360;
-  const L=(q+1.915*Math.sin(rad(g))+0.020*Math.sin(rad(2*g)))%360;
-  const e=23.439-0.00000036*D;
-  let RA=deg(Math.atan2(Math.cos(rad(e))*Math.sin(rad(L)),Math.cos(rad(L))))/15; RA=(RA+24)%24;
-  let eqt=q/15-RA; eqt=((eqt+12)%24+24)%24-12;
-  const dec=deg(Math.asin(Math.sin(rad(e))*Math.sin(rad(L))));
-  const noon=12+8-lng/15-eqt; // jam tempatan UTC+8
-  const T=a=>deg(Math.acos((-Math.sin(rad(a))-Math.sin(rad(dec))*Math.sin(rad(lat)))/(Math.cos(rad(dec))*Math.cos(rad(lat)))))/15;
-  const asrA=-deg(Math.atan(1/(1+Math.tan(rad(Math.abs(lat-dec))))));
-  const toTs=h=>Math.round((Date.UTC(y,m-1,d)/1000)+(h-8)*3600);
-  const ih=2/60;
-  const fajr=noon-T(18)+ih, syuruk=noon-T(0.833)-ih;
-  return {day:d,hijri:null,imsak:toTs(fajr-10/60),fajr:toTs(fajr),syuruk:toTs(syuruk),dhuha:toTs(syuruk+28/60),
-    dhuhr:toTs(noon+4/60),asr:toTs(noon+T(asrA)+ih),maghrib:toTs(noon+T(0.833)+ih),isha:toTs(noon+T(18)+ih)};
-}
-function calcMonth(y,m,lat,lng){
-  const n=new Date(y,m,0).getDate(),out=[];
-  for(let d=1;d<=n;d++)out.push(calcDay(y,m,d,lat,lng));
-  return {zone:'ANGGARAN',year:y,month_number:m,prayers:out,_offline:true};
-}
-
-/* ---------------- Keadaan ---------------- */
-let state={zone:store.get('zone','SGR02'),data:null,gps:store.get('gps',null),monthOpen:false};
-const $=id=>document.getElementById(id);
-
-function fillZones(){
-  const sel=$('zone');sel.innerHTML='';
-  for(const s in ZONES){const g=document.createElement('optgroup');g.label=s;
-    for(const [k,n] of ZONES[s]){const o=document.createElement('option');o.value=k;o.textContent=`${k} · ${n}`;g.appendChild(o)}
-    sel.appendChild(g)}
-  sel.value=state.zone;
-}
-function notice(msg){const n=$('notice');if(msg){n.innerHTML=msg;n.classList.add('show')}else n.classList.remove('show')}
-
-async function load(zone,{lat,lng}={}){
-  const {y,m}=klParts();
-  const key=`cache_${zone}_${y}_${m}`;
-  const cached=store.get(key,null);
-  if(cached){state.data=cached;render()}
-  try{
-    const url=lat!=null?`${API}/v2/solat/gps/${lat}/${lng}?year=${y}&month=${m}`:`${API}/v2/solat/${zone}?year=${y}&month=${m}`;
-    const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),8000);
-    const r=await fetch(url,{headers:{Accept:'application/json'},signal:ctl.signal});clearTimeout(to);
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    const j=await r.json();
-    if(!j.prayers||!j.prayers.length)throw new Error('Tiada data');
-    if(j.zone&&j.zone!==state.zone){state.zone=j.zone;store.set('zone',j.zone);$('zone').value=j.zone}
-    store.set(`cache_${state.zone}_${y}_${m}`,j);
-    state.data=j;notice('');render();
-  }catch(err){
-    if(cached){notice('Tiada sambungan internet — memaparkan data JAKIM yang disimpan.');return}
-    const g=state.gps||{lat:3.3417,lng:101.2526}; // Kuala Selangor
-    state.data=calcMonth(y,m,g.lat,g.lng);
-    notice(`<b>Mod anggaran:</b> tidak dapat menghubungi pelayan waktu solat. Waktu dikira secara anggaran (parameter JAKIM) bagi ${state.gps?'lokasi anda':'Kuala Selangor'} dan mungkin berbeza ±1–2 minit daripada jadual rasmi.`);
-    render();
-  }
-}
-
-const ORDER=[
-  ['imsak','Imsak','إمساك',true],['fajr','Subuh','الصبح'],['syuruk','Syuruk','الشروق',true],['dhuha','Dhuha','الضحى',true],
-  ['dhuhr','Zohor','الظهر'],['asr','Asar','العصر'],['maghrib','Maghrib','المغرب'],['isha','Isyak','العشاء']];
-const FARDU=['fajr','dhuhr','asr','maghrib','isha'];
-
-function todayRow(){
-  const {d}=klParts();const p=state.data?.prayers||[];
-  return p.find(x=>+x.day===d)||p[d-1]||null;
-}
-
-function render(){
-  const zn=state.data?._offline?'Anggaran':state.zone;
-  $('zoneShort').textContent=`${zn} · ${zoneName(state.zone)}`;
-  const t=todayRow();const {y,m,d}=klParts();
-  const wd=HARI[new Date(Date.UTC(y,m-1,d)).getUTCDay()];
-  $('dMasihi').textContent=`${wd}, ${d} ${BULAN[m-1]} ${y}`;
-  $('dHijri').textContent=(t&&t.hijri)?fmtHijri(t.hijri):hijriIntl();
-  if(!t){$('times').innerHTML='';return}
-  const now=Date.now()/1000;
-  let cur=null;for(const k of FARDU)if(t[k]&&t[k]<=now)cur=k;
-  if(cur==='fajr'&&t.syuruk&&now>=t.syuruk)cur=null; // selepas syuruk tiada waktu fardu
-  $('times').innerHTML=ORDER.filter(([k])=>t[k]).map(([k,n,a,minor])=>{
-    const past=t[k]<=now&&k!==cur;
-    return `<div class="t ${minor?'minor':''} ${k===cur?'now':''} ${past&&!minor?'past':''}">
-      <div class="n">${n}${k===cur?'<span class="tag">SEKARANG</span>':''}${minor?'':`<small>${a}</small>`}</div>
-      <div class="v">${fmtTime(t[k])}</div></div>`}).join('');
-  renderMonth();tick();
-}
-
-function renderMonth(){
-  const p=state.data?.prayers||[];const {d,m,y}=klParts();
-  $('monthTitle').textContent=`Jadual ${BULAN[(state.data?.month_number||m)-1]} ${state.data?.year||y}`;
-  const f=ts=>ts?new Date(ts*1000).toLocaleTimeString('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit'}):'-';
-  $('month').innerHTML=`<table><thead><tr><th>Tarikh</th><th>Hijri</th><th>Imsak</th><th>Subuh</th><th>Syuruk</th><th>Zohor</th><th>Asar</th><th>Maghrib</th><th>Isyak</th></tr></thead><tbody>${
-    p.map(r=>`<tr class="${+r.day===d?'today':''}"><td>${r.day}</td><td>${r.hijri?fmtHijri(r.hijri).replace(/ \d{4}H$/,''):'-'}</td><td>${f(r.imsak)}</td><td>${f(r.fajr)}</td><td>${f(r.syuruk)}</td><td>${f(r.dhuhr)}</td><td>${f(r.asr)}</td><td>${f(r.maghrib)}</td><td>${f(r.isha)}</td></tr>`).join('')}</tbody></table>`;
-}
-
-let lastCur=null;
-function tick(){
-  const n=klParts();$('clock').textContent=`${pad(n.h)}:${pad(n.mi)}:${pad(n.s)}`;
-  const t=todayRow();if(!t)return;
-  const now=Date.now()/1000;
-  const list=[['fajr','Subuh'],['syuruk','Syuruk'],['dhuhr','Zohor'],['asr','Asar'],['maghrib','Maghrib'],['isha','Isyak']];
-  let next=list.find(([k])=>t[k]&&t[k]>now),ts,name;
-  if(next){[,name]=next;ts=t[next[0]]}
-  else{const p=state.data.prayers;const nx=p.find(x=>+x.day===n.d+1);ts=nx?nx.fajr:t.fajr+86400;name='Subuh'}
-  const diff=Math.max(0,Math.round(ts-now));
-  $('nextLabel').textContent=next?'Waktu seterusnya':'Waktu seterusnya · esok';
-  $('nextName').innerHTML=`${name}<span>${fmtTime(ts)}</span>`;
-  $('countdown').textContent=`${pad(Math.floor(diff/3600))}:${pad(Math.floor(diff%3600/60))}:${pad(diff%60)}`;
-  let cur=null;for(const k of FARDU)if(t[k]&&t[k]<=now)cur=k;
-  if(cur!==lastCur){lastCur=cur;if(lastCur!==undefined)render()}
-}
-
-/* ---------------- Wirid ---------------- */
-const WIRID=[
- {t:'Istighfar',c:3,
-  ar:'أَسْتَغْفِرُ اللّٰهَ الْعَظِيْمَ الَّذِيْ لَآ إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّوْمُ وَأَتُوْبُ إِلَيْهِ',
-  r:'Astaghfirullāhal-‘aẓīm, alladzī lā ilāha illā huwal-ḥayyul-qayyūm, wa atūbu ilaih.',
-  m:'Aku memohon ampun kepada Allah Yang Maha Agung, yang tiada Tuhan melainkan Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri, dan aku bertaubat kepada-Nya.'},
- {t:'Tahlil',c:3,
-  ar:'لَآ إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِيْ وَيُمِيْتُ، وَهُوَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ',
-  r:'Lā ilāha illallāhu waḥdahū lā syarīka lah, lahul-mulku wa lahul-ḥamdu, yuḥyī wa yumītu, wa huwa ‘alā kulli syai’in qadīr.',
-  m:'Tiada Tuhan melainkan Allah, Yang Maha Esa, tiada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian. Dia menghidupkan dan mematikan, dan Dia Maha Berkuasa atas segala sesuatu.'},
- {t:'Doa Perlindungan daripada Neraka',c:7,n:'Diamalkan khususnya selepas Subuh dan Maghrib',
-  ar:'اَللّٰهُمَّ أَجِرْنِيْ مِنَ النَّارِ',
-  r:'Allāhumma ajirnī minan-nār.',
-  m:'Ya Allah, selamatkanlah aku daripada api neraka.'},
- {t:'Doa Kesejahteraan',c:1,
-  ar:'اَللّٰهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، وَإِلَيْكَ يَعُوْدُ السَّلَامُ، فَحَيِّنَا رَبَّنَا بِالسَّلَامِ، وَأَدْخِلْنَا الْجَنَّةَ دَارَ السَّلَامِ، تَبَارَكْتَ رَبَّنَا وَتَعَالَيْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ',
-  r:'Allāhumma antas-salām, wa minkas-salām, wa ilaika ya‘ūdus-salām, fa ḥayyinā rabbanā bis-salām, wa adkhilnal-jannata dāras-salām, tabārakta rabbanā wa ta‘ālaita yā dzal-jalāli wal-ikrām.',
-  m:'Ya Allah, Engkaulah Yang Maha Sejahtera, daripada-Mu datangnya kesejahteraan dan kepada-Mu kembalinya kesejahteraan. Hidupkanlah kami, wahai Tuhan kami, dalam kesejahteraan dan masukkanlah kami ke dalam syurga, negeri kesejahteraan. Maha Berkat Engkau, wahai Tuhan kami, dan Maha Tinggi Engkau, wahai Tuhan yang memiliki kebesaran dan kemuliaan.'},
- {t:'Surah Al-Fatihah',c:1,
-  ar:'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ﴿١﴾ اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ ﴿٢﴾ الرَّحْمٰنِ الرَّحِيْمِ ﴿٣﴾ مٰلِكِ يَوْمِ الدِّيْنِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِيْنُ ﴿٥﴾ اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ ﴿٦﴾ صِرَاطَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّآلِّيْنَ ﴿٧﴾',
-  r:'Bismillāhir-raḥmānir-raḥīm. Alḥamdu lillāhi rabbil-‘ālamīn. Ar-raḥmānir-raḥīm. Māliki yaumid-dīn. Iyyāka na‘budu wa iyyāka nasta‘īn. Ihdinaṣ-ṣirāṭal-mustaqīm. Ṣirāṭal-ladzīna an‘amta ‘alaihim ghairil-maghḍūbi ‘alaihim wa laḍ-ḍāllīn.',
-  m:'Dengan nama Allah, Yang Maha Pemurah, lagi Maha Mengasihani. Segala puji bagi Allah, Tuhan sekalian alam. Yang Maha Pemurah, lagi Maha Mengasihani. Yang Menguasai hari pembalasan. Hanya Engkaulah yang kami sembah dan hanya kepada Engkaulah kami memohon pertolongan. Tunjukilah kami jalan yang lurus, iaitu jalan orang-orang yang telah Engkau kurniakan nikmat kepada mereka, bukan jalan mereka yang dimurkai dan bukan pula jalan mereka yang sesat.'},
- {t:'Ayat al-Kursi',n:'Surah Al-Baqarah, ayat 255',c:1,
-  ar:'اَللّٰهُ لَآ إِلٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّوْمُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَّلَا نَوْمٌ ۗ لَهُ مَا فِى السَّمٰوٰتِ وَمَا فِى الْأَرْضِ ۗ مَنْ ذَا الَّذِيْ يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۗ يَعْلَمُ مَا بَيْنَ أَيْدِيْهِمْ وَمَا خَلْفَهُمْ ۚ وَلَا يُحِيْطُوْنَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَآءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمٰوٰتِ وَالْأَرْضَ ۚ وَلَا يَئُوْدُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيْمُ',
-  r:'Allāhu lā ilāha illā huwal-ḥayyul-qayyūm, lā ta’khudzuhū sinatuw-wa lā naum, lahū mā fis-samāwāti wa mā fil-arḍ, man dzal-ladzī yasyfa‘u ‘indahū illā bi’idznih, ya‘lamu mā baina aidīhim wa mā khalfahum, wa lā yuḥīṭūna bisyai’im-min ‘ilmihī illā bimā syā’, wasi‘a kursiyyuhus-samāwāti wal-arḍ, wa lā ya’ūduhū ḥifẓuhumā, wa huwal-‘aliyyul-‘aẓīm.',
-  m:'Allah, tiada Tuhan melainkan Dia, Yang Maha Hidup lagi Maha Berdiri Sendiri. Dia tidak mengantuk dan tidak tidur. Milik-Nya apa yang ada di langit dan di bumi. Tiada sesiapa yang dapat memberi syafaat di sisi-Nya melainkan dengan izin-Nya. Dia mengetahui apa yang di hadapan dan di belakang mereka, sedangkan mereka tidak mengetahui sesuatu pun daripada ilmu-Nya melainkan apa yang Dia kehendaki. Kursi-Nya meliputi langit dan bumi, dan Dia tidak berasa berat memelihara keduanya. Dan Dialah Yang Maha Tinggi lagi Maha Agung.'},
- {t:'Surah Al-Ikhlas',c:1,n:'Selepas Subuh dan Maghrib, lazimnya 3 kali',
-  ar:'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ۝ قُلْ هُوَ اللّٰهُ أَحَدٌ ﴿١﴾ اَللّٰهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُوْلَدْ ﴿٣﴾ وَلَمْ يَكُنْ لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾',
-  r:'Bismillāhir-raḥmānir-raḥīm. Qul huwallāhu aḥad. Allāhuṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakul-lahū kufuwan aḥad.',
-  m:'Katakanlah: Dialah Allah Yang Maha Esa. Allah tempat bergantung segala sesuatu. Dia tidak beranak dan tidak diperanakkan. Dan tiada sesuatu pun yang setara dengan-Nya.'},
- {t:'Surah Al-Falaq',c:1,n:'Selepas Subuh dan Maghrib, lazimnya 3 kali',
-  ar:'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ۝ قُلْ أَعُوْذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِنْ شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِنْ شَرِّ النَّفّٰثٰتِ فِى الْعُقَدِ ﴿٤﴾ وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾',
-  r:'Bismillāhir-raḥmānir-raḥīm. Qul a‘ūdzu birabbil-falaq. Min syarri mā khalaq. Wa min syarri ghāsiqin idzā waqab. Wa min syarrin-naffātsāti fil-‘uqad. Wa min syarri ḥāsidin idzā ḥasad.',
-  m:'Katakanlah: Aku berlindung kepada Tuhan yang menguasai subuh, daripada kejahatan makhluk yang Dia ciptakan, daripada kejahatan malam apabila ia gelap-gelita, daripada kejahatan tukang sihir yang menghembus pada simpulan tali, dan daripada kejahatan orang yang dengki apabila dia berdengki.'},
- {t:'Surah An-Nas',c:1,n:'Selepas Subuh dan Maghrib, lazimnya 3 kali',
-  ar:'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ۝ قُلْ أَعُوْذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلٰهِ النَّاسِ ﴿٣﴾ مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِيْ يُوَسْوِسُ فِيْ صُدُوْرِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾',
-  r:'Bismillāhir-raḥmānir-raḥīm. Qul a‘ūdzu birabbin-nās. Malikin-nās. Ilāhin-nās. Min syarril-waswāsil-khannās. Alladzī yuwaswisu fī ṣudūrin-nās. Minal-jinnati wan-nās.',
-  m:'Katakanlah: Aku berlindung kepada Tuhan manusia, Raja manusia, Sembahan manusia, daripada kejahatan pembisik yang bersembunyi, yang membisikkan kejahatan ke dalam dada manusia, daripada golongan jin dan manusia.'},
- {t:'Tasbih',c:33,ar:'سُبْحَانَ اللّٰهِ',r:'Subḥānallāh.',m:'Maha Suci Allah.'},
- {t:'Tahmid',c:33,ar:'اَلْحَمْدُ لِلّٰهِ',r:'Alḥamdulillāh.',m:'Segala puji bagi Allah.'},
- {t:'Takbir',c:33,ar:'اَللّٰهُ أَكْبَرُ',r:'Allāhu akbar.',m:'Allah Maha Besar.'},
- {t:'Penyempurna Seratus',c:1,
-  ar:'لَآ إِلٰهَ إِلَّا اللّٰهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ',
-  r:'Lā ilāha illallāhu waḥdahū lā syarīka lah, lahul-mulku wa lahul-ḥamdu, wa huwa ‘alā kulli syai’in qadīr.',
-  m:'Tiada Tuhan melainkan Allah, Yang Maha Esa, tiada sekutu bagi-Nya. Bagi-Nya kerajaan dan bagi-Nya segala pujian, dan Dia Maha Berkuasa atas segala sesuatu.'},
- {t:'Doa Memohon Pertolongan',c:1,
-  ar:'اَللّٰهُمَّ أَعِنِّيْ عَلٰى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ',
-  r:'Allāhumma a‘innī ‘alā dzikrika wa syukrika wa ḥusni ‘ibādatik.',
-  m:'Ya Allah, bantulah aku untuk mengingati-Mu, mensyukuri-Mu dan memperelok ibadahku kepada-Mu.'},
- {t:'Doa Kebaikan Dunia dan Akhirat',n:'Surah Al-Baqarah, ayat 201',c:1,
-  ar:'رَبَّنَآ اٰتِنَا فِى الدُّنْيَا حَسَنَةً وَّفِى الْاٰخِرَةِ حَسَنَةً وَّقِنَا عَذَابَ النَّارِ',
-  r:'Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, wa qinā ‘adzāban-nār.',
-  m:'Wahai Tuhan kami, kurniakanlah kepada kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka.'}
-];
-
-let counts=store.get('counts',{});
-const cntKey=()=>{const {y,m,d}=klParts();return `${y}-${m}-${d}`};
-if(counts._day!==cntKey())counts={_day:cntKey()};
-
-function renderWirid(){
-  $('wirid').innerHTML=WIRID.map((w,i)=>`
-   <article class="w" id="w${i}">
-     <div class="w-head"><div><div class="w-title">${w.t}</div>${w.n?`<div class="w-note">${w.n}</div>`:''}</div><div class="num">${i+1}</div></div>
-     <div class="ar">${w.ar}</div>
-     <div class="rumi">${w.r}</div>
-     <div class="maksud">${w.m}</div>
-     <div class="counter">
-       <button class="tap" data-i="${i}"><div class="bar"></div><span></span></button>
-       <button class="mini" data-reset="${i}" aria-label="Set semula">↺</button>
-     </div>
-   </article>`).join('');
-  WIRID.forEach((_,i)=>updW(i));updAll();
-}
-function updW(i){
-  const w=WIRID[i],c=counts[i]||0,el=$('w'+i);
-  el.classList.toggle('done',c>=w.c);
-  el.querySelector('.bar').style.width=Math.min(100,c/w.c*100)+'%';
-  el.querySelector('.tap span').textContent=c>=w.c?`✓ Selesai · ${w.c}×`:(w.c===1?'Tanda selesai':`${c} / ${w.c}`);
-}
-function updAll(){
-  const done=WIRID.filter((w,i)=>(counts[i]||0)>=w.c).length;
-  $('pAll').style.width=done/WIRID.length*100+'%';
-  $('pMeta').textContent=`${done} daripada ${WIRID.length} bacaan selesai`;
-}
-$('wirid').addEventListener('click',e=>{
-  const tap=e.target.closest('.tap'),rs=e.target.closest('[data-reset]');
-  if(tap){const i=+tap.dataset.i,w=WIRID[i];
-    if((counts[i]||0)>=w.c)return;
-    counts[i]=(counts[i]||0)+1;
-    try{navigator.vibrate&&navigator.vibrate(counts[i]>=w.c?[30,40,30]:12)}catch(_){}
-    updW(i);updAll();store.set('counts',counts);
-    if(counts[i]>=w.c&&WIRID[i+1])setTimeout(()=>$('w'+(i+1)).scrollIntoView({behavior:'smooth',block:'center'}),350);
-  }
-  if(rs){const i=+rs.dataset.reset;counts[i]=0;updW(i);updAll();store.set('counts',counts)}
-});
-$('resetAll').onclick=()=>{counts={_day:cntKey()};WIRID.forEach((_,i)=>updW(i));updAll();store.set('counts',counts);window.scrollTo({top:0,behavior:'smooth'})};
-
-/* tetapan paparan */
-let pref=store.get('pref',{rumi:true,maksud:true,ar:1.9});
-function applyPref(){
-  document.body.classList.toggle('no-rumi',!pref.rumi);document.body.classList.toggle('no-maksud',!pref.maksud);
-  $('tRumi').classList.toggle('on',pref.rumi);$('tMaksud').classList.toggle('on',pref.maksud);
-  document.documentElement.style.setProperty('--ar',pref.ar+'rem');store.set('pref',pref);
-}
-$('tRumi').onclick=()=>{pref.rumi=!pref.rumi;applyPref()};
-$('tMaksud').onclick=()=>{pref.maksud=!pref.maksud;applyPref()};
-$('fPlus').onclick=()=>{pref.ar=Math.min(3.2,+(pref.ar+0.2).toFixed(1));applyPref()};
-$('fMinus').onclick=()=>{pref.ar=Math.max(1.3,+(pref.ar-0.2).toFixed(1));applyPref()};
-
-/* ---------------- Navigasi ---------------- */
-function show(v){
-  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
-  if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);
-  window.scrollTo(0,0);
-}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
-window.addEventListener('hashchange',()=>show(location.hash==='#wirid'?'wirid':'solat'));
-
-$('zone').onchange=e=>{state.zone=e.target.value;store.set('zone',state.zone);load(state.zone)};
-$('toggleMonth').onclick=()=>{state.monthOpen=!state.monthOpen;$('month').classList.toggle('show',state.monthOpen);$('toggleMonth').textContent=state.monthOpen?'Sembunyi':'Tunjuk'};
-$('gps').onclick=()=>{
-  const b=$('gps');
-  if(!navigator.geolocation){notice('Peranti ini tidak menyokong pengesanan lokasi. Sila pilih zon secara manual.');return}
-  b.innerHTML='<span class="spin"></span>Mengesan…';
-  navigator.geolocation.getCurrentPosition(p=>{
-    const g={lat:+p.coords.latitude.toFixed(4),lng:+p.coords.longitude.toFixed(4)};
-    state.gps=g;store.set('gps',g);b.textContent='📍 Lokasi';load(state.zone,g);
-  },()=>{b.textContent='📍 Lokasi';notice('Akses lokasi tidak dibenarkan. Sila pilih zon secara manual.')},{timeout:10000});
-};
-
-/* ---------------- Pembangun & derma (ubah di sini) ---------------- */
-const PEMBANGUN={nama:'Ibrahim bin Kadri',telefon:'019-300 2591',whatsapp:'60193002591'};
-$('pNama').textContent=PEMBANGUN.nama;$('dNama').textContent=PEMBANGUN.nama;
-$('pTelefon').href='https://wa.me/'+PEMBANGUN.whatsapp;
-$('pTelefon').querySelector('span').textContent=PEMBANGUN.telefon+' (WhatsApp)';
-$('dWa').href='https://wa.me/'+PEMBANGUN.whatsapp+'?text='+encodeURIComponent('Salam, saya ingin bertanya tentang app Waktu Solat & Wirid.');
-const md=$('modalDerma');
-$('btnDerma').onclick=()=>md.classList.add('show');
-$('dTutup').onclick=()=>md.classList.remove('show');
-md.onclick=e=>{if(e.target===md)md.classList.remove('show')};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')md.classList.remove('show')});
-
-/* ---------------- Mula ---------------- */
-fillZones();applyPref();renderWirid();
-show(location.hash==='#wirid'?'wirid':'solat');
-load(state.zone);
-setInterval(tick,1000);
+  (function () {
+    var APP = new URL('app/', location.href).href;
+    if (!/^https?:/.test(APP) || /claude|localhost|file:/.test(APP)) APP = 'https://g-03355699-tech.github.io/waktu-solat/app/';
+    try {
+      var q = qrcode(0, 'M');
+      q.addData(APP);
+      q.make();
+      document.getElementById('kodQr').innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true });
+    } catch (e) {}
+  })();
 </script>
 </body>
 </html>

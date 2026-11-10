@@ -1,0 +1,16 @@
+{
+  "name": "Waktu Solat & Wirid",
+  "short_name": "Waktu Solat",
+  "description": "Waktu solat JAKIM mengikut zon dan bacaan wirid selepas solat dengan pembilang tasbih.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f2a2a",
+  "theme_color": "#0f2a2a",
+  "lang": "ms",
+  "icons": [
+    { "src": "ikon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "ikon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "ikon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
