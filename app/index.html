@@ -156,6 +156,59 @@ nav{gap:2px;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
 nav button{flex-direction:column;gap:3px;padding:7px 2px;font-size:.66rem;line-height:1.15;border-radius:12px;max-width:none;min-width:0}
 nav button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 nav svg{width:20px;height:20px}
+/* segmen zikir */
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:12px}
+.seg button{font:inherit;font-size:.82rem;font-weight:600;border:0;border-radius:10px;padding:9px 4px;background:transparent;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--gold);color:#1b1608}
+.subv{display:none}.subv.on{display:block}
+/* butang kalendar di kad atas */
+.kal-btn{font:inherit;display:inline-flex;align-items:center;gap:6px;background:rgba(217,180,106,.14);border:1px solid rgba(217,180,106,.35);color:var(--ink);border-radius:99px;padding:3px 10px 3px 8px;cursor:pointer;position:relative;z-index:1}
+.kal-btn svg{color:var(--gold)}.kal-btn .chev{color:var(--gold);font-weight:700}
+/* kalendar */
+.kembali{font:inherit;font-size:.85rem;background:transparent;border:0;color:var(--gold2);padding:6px 0;cursor:pointer}
+.kal-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0 10px}
+.kal-title{text-align:center;flex:1}
+.kal-title b{display:block;font-size:1.2rem}
+.kal-title small{color:var(--gold);font-size:.8rem;font-weight:600}
+.kal-nav{font:inherit;font-size:1.4rem;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.kal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.kh{text-align:center;font-size:.7rem;color:var(--muted);font-weight:600;padding:4px 0;text-transform:uppercase}
+.kh.jum{color:var(--gold)}
+.kd{font:inherit;position:relative;aspect-ratio:1/1.08;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px;line-height:1.1}
+.kd .g{font-size:.98rem;font-weight:600;font-variant-numeric:tabular-nums}
+.kd .h{font-size:.66rem;color:var(--gold);margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kd .h b{font-size:.58rem;font-weight:700}
+.kd .dots{display:flex;gap:2px;height:5px;margin-top:2px}
+.kd.ram{background:rgba(127,209,168,.10);border-color:rgba(127,209,168,.35)}
+.kd.besar{border-color:var(--gold)}
+.kd.jum .g{color:var(--gold2)}
+.kd.today{background:var(--gold);border-color:var(--gold)}
+.kd.today .g,.kd.today .h{color:#1b1608}
+.kd.sel{outline:2px solid var(--gold2);outline-offset:1px}
+.dot{display:inline-block;width:5px;height:5px;border-radius:50%}
+.dot.besar{background:var(--gold2)}.dot.puasa{background:var(--ok)}.dot.sunat{background:#8fb3ad}.dot.tasyrik{background:#e08a7a}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px}.sw.ram{background:rgba(127,209,168,.25);border:1px solid rgba(127,209,168,.5)}
+.kal-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.72rem;color:var(--muted);margin:10px 2px 0}
+.kal-legend span{display:inline-flex;align-items:center;gap:5px}
+.kal-hariini{margin-top:10px;width:100%;justify-content:center}
+.kal-detail{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.kd-tarikh{font-weight:700}
+.kd-hijri{color:var(--gold2);font-size:.92rem;margin-top:2px}
+.kd-hijri small{color:var(--muted)}
+.kd-ev{list-style:none;margin-top:8px;display:grid;gap:4px;font-size:.84rem}
+.kd-ev li::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:#8fb3ad;vertical-align:middle}
+.kd-ev li.besar::before{background:var(--gold2)}.kd-ev li.puasa::before{background:var(--ok)}.kd-ev li.tasyrik::before{background:#e08a7a}.kd-ev li.ramadan::before{background:var(--ok)}
+.kd-waktu{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:10px}
+.kd-waktu div{text-align:center;background:var(--bg2);border-radius:10px;padding:6px 2px}
+.kd-waktu span{display:block;font-size:.66rem;color:var(--muted);text-transform:uppercase}
+.kd-waktu b{font-size:.85rem;font-variant-numeric:tabular-nums}
+.k-kosong{color:var(--muted);font-size:.85rem}
+.kal-akan{list-style:none;margin-top:8px;display:grid;gap:6px}
+.kal-akan li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:10px 12px}
+.kal-akan li.puasa{border-left-color:var(--ok)}
+.kal-akan b{display:block;font-size:.9rem}
+.kal-akan span{font-size:.75rem;color:var(--muted)}
+.kal-akan em{font-style:normal;font-size:.72rem;color:var(--gold2);white-space:nowrap;font-weight:600}
 @media (max-width:420px){.countdown{font-size:2.1rem}}
 #v-solat select,#v-solat .btn{padding:8px 10px;font-size:.82rem}
 /* telefon rendah (cth. iPhone SE) */
@@ -178,7 +231,7 @@ nav svg{width:20px;height:20px}
   <!-- ============ WAKTU SOLAT ============ -->
   <section class="view on" id="v-solat">
     <div class="hero">
-      <div class="dates"><b id="dHijri">—</b><span id="dMasihi">—</span></div>
+      <div class="dates"><button class="kal-btn" id="bukaKal" title="Buka kalendar Hijri"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><b id="dHijri">—</b><span class="chev">›</span></button><span id="dMasihi">—</span></div>
       <div class="next-label" id="nextLabel">Waktu seterusnya</div>
       <div class="next-name" id="nextName">—<span id="nextTime"></span></div>
       <div class="countdown" id="countdown">--:--:--</div>
@@ -231,11 +284,49 @@ nav svg{width:20px;height:20px}
 
   <!-- ============ ZIKIR SUNNAH ============ -->
   <section class="view" id="v-sunnah">
-    <div class="intro"><h2>Zikir Sunnah Selepas Solat</h2><p>Bacaan selepas solat yang diajar oleh Rasulullah ﷺ, berdasarkan hadis. Sumber riwayat dinyatakan pada setiap bacaan.</p></div>
-    <div class="progress-all"><i id="p-sunnah"></i></div>
-    <div class="pmeta" id="m-sunnah"></div>
-    <div id="l-sunnah"></div>
-    <p class="src">Darjat hadis dinyatakan secara ringkas. Rujuk guru atau kitab muktabar untuk huraian lanjut.</p>
+    <div class="seg" id="segZikir">
+      <button data-z="sunnah" class="on">Selepas Solat</button>
+      <button data-z="pagi">☀️ Pagi</button>
+      <button data-z="petang">🌙 Petang</button>
+    </div>
+    <div class="subv on" data-z="sunnah">
+      <div class="intro"><h2>Zikir Sunnah Selepas Solat</h2><p>Bacaan selepas solat yang diajar oleh Rasulullah ﷺ, berdasarkan hadis. Sumber riwayat dinyatakan pada setiap bacaan.</p></div>
+      <div class="progress-all"><i id="p-sunnah"></i></div>
+      <div class="pmeta" id="m-sunnah"></div>
+      <div id="l-sunnah"></div>
+      <p class="src">Darjat hadis dinyatakan secara ringkas. Rujuk guru atau kitab muktabar untuk huraian lanjut.</p>
+    </div>
+    <div class="subv" data-z="pagi">
+      <div class="intro"><h2>Al-Ma’thurat — Zikir Pagi</h2><p>Wazifah Sughra susunan Imam Hasan al-Banna, himpunan ayat Al-Quran dan zikir daripada hadis. Dibaca selepas Subuh hingga sebelum Zohor.</p></div>
+      <div class="progress-all"><i id="p-pagi"></i></div>
+      <div class="pmeta" id="m-pagi"></div>
+      <div id="l-pagi"></div>
+    </div>
+    <div class="subv" data-z="petang">
+      <div class="intro"><h2>Al-Ma’thurat — Zikir Petang</h2><p>Wazifah Sughra susunan Imam Hasan al-Banna. Dibaca selepas Asar hingga sebelum Maghrib (atau selepas Maghrib). Lafaz <i>aṣbaḥnā</i> ditukar kepada <i>amsainā</i>.</p></div>
+      <div class="progress-all"><i id="p-petang"></i></div>
+      <div class="pmeta" id="m-petang"></div>
+      <div id="l-petang"></div>
+    </div>
+    <p class="src" id="srcMathurat" style="display:none">Susunan mengikut cetakan al-Ma’thurat yang lazim di Malaysia; mungkin berbeza sedikit antara cetakan. Sumber hadis dinyatakan secara ringkas.</p>
+  </section>
+
+  <!-- ============ KALENDAR HIJRI ============ -->
+  <section class="view" id="v-kalendar">
+    <button class="kembali" id="kKembali">‹ Waktu Solat</button>
+    <div class="kal-head">
+      <button class="kal-nav" id="kPrev" aria-label="Bulan sebelum">‹</button>
+      <div class="kal-title"><b id="kTajuk"></b><small id="kHijri"></small></div>
+      <button class="kal-nav" id="kNext" aria-label="Bulan seterusnya">›</button>
+    </div>
+    <div class="kal-grid" id="kGrid"></div>
+    <div class="kal-legend"><span><i class="dot besar"></i>Hari kebesaran</span><span><i class="dot puasa"></i>Puasa sunat khusus</span><span><i class="dot sunat"></i>Isnin/Khamis</span><span><i class="sw ram"></i>Ramadan</span></div>
+    <button class="btn kal-hariini" id="kHariIni">Hari ini</button>
+    <div class="kal-detail" id="kDetail"></div>
+    <h3 class="subjudul">Tarikh penting akan datang</h3>
+    <ul class="kal-akan" id="kAkan"></ul>
+    <p class="src" id="kNota"></p>
+    <p class="src">Tarikh rasmi Awal Ramadan, Aidilfitri dan Aidiladha ditentukan melalui pengisytiharan Penyimpan Mohor Besar Raja-Raja.</p>
   </section>
 
   <!-- ============ BACAAN DALAM SOLAT ============ -->
@@ -273,7 +364,7 @@ nav svg{width:20px;height:20px}
   <button class="on" data-v="solat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Waktu Solat</span></button>
   <button data-v="azan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><span>Jawab Azan</span></button>
   <button data-v="wirid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></svg><span>Wirid</span></button>
-  <button data-v="sunnah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><circle cx="17.3" cy="6.7" r="1.5"/><circle cx="19.5" cy="12" r="1.5"/><circle cx="17.3" cy="17.3" r="1.5"/><circle cx="6.7" cy="6.7" r="1.5"/><circle cx="4.5" cy="12" r="1.5"/><circle cx="6.7" cy="17.3" r="1.5"/><circle cx="12" cy="19.5" r="1.5"/></svg><span>Zikir Sunnah</span></button>
+  <button data-v="sunnah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="1.5"/><circle cx="17.3" cy="6.7" r="1.5"/><circle cx="19.5" cy="12" r="1.5"/><circle cx="17.3" cy="17.3" r="1.5"/><circle cx="6.7" cy="6.7" r="1.5"/><circle cx="4.5" cy="12" r="1.5"/><circle cx="6.7" cy="17.3" r="1.5"/><circle cx="12" cy="19.5" r="1.5"/></svg><span>Zikir</span></button>
   <button data-v="dalam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M9 21.5v-7a3 3 0 0 1 6 0v7M9 6.5h6"/></svg><span>Dalam Solat</span></button>
 </nav>
 
@@ -415,6 +506,7 @@ function render(){
   const kecil=ORDER.filter(([k,,,m])=>m&&t[k]);
   $('times').innerHTML=`<div class="minor-row">${kecil.map(([k,n])=>`<div class="mc"><span>${n}</span><b>${fmtTime(t[k])}</b></div>`).join('')}</div>`
     +ORDER.filter(([k,,,m])=>!m&&t[k]).map(row).join('');
+  rememberMonth(state.data);kiraOffset();
   renderMonth();tick();
 }
 
@@ -648,7 +740,205 @@ const DALAM=[
  {t:'Salam',step:'Menoleh ke kanan, kemudian ke kiri',ar:'اَلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللّٰهِ',r:'As-salāmu ‘alaikum wa raḥmatullāh.',m:'Salam sejahtera ke atas kamu dan rahmat Allah.'}
 ];
 
-const SEC={wirid:{items:WIRID,count:true},sunnah:{items:SUNNAH,count:true},dalam:{items:DALAM,count:false}};
+
+/* ---------------- Al-Ma'thurat (Wazifah Sughra) — pagi & petang ---------------- */
+const MATHURAT_ASAS=[
+ {t:'Ta‘awwuz & Surah Al-Fatihah',c:1,
+  ar:'أَعُوْذُ بِاللّٰهِ مِنَ الشَّيْطٰنِ الرَّجِيْمِ<br>'+WIRID[4].ar,
+  r:'A‘ūdzu billāhi minasy-syaiṭānir-rajīm. '+WIRID[4].r,
+  m:'Aku berlindung kepada Allah daripada syaitan yang direjam. '+WIRID[4].m},
+ {t:'Surah Al-Baqarah, ayat 1–5',c:1,
+  ar:'الٓمّٓ ﴿١﴾ ذٰلِكَ الْكِتٰبُ لَا رَيْبَ ۛ فِيْهِ ۛ هُدًى لِّلْمُتَّقِيْنَ ﴿٢﴾ الَّذِيْنَ يُؤْمِنُوْنَ بِالْغَيْبِ وَيُقِيْمُوْنَ الصَّلٰوةَ وَمِمَّا رَزَقْنٰهُمْ يُنْفِقُوْنَ ﴿٣﴾ وَالَّذِيْنَ يُؤْمِنُوْنَ بِمَآ أُنْزِلَ إِلَيْكَ وَمَآ أُنْزِلَ مِنْ قَبْلِكَ ۚ وَبِالْاٰخِرَةِ هُمْ يُوْقِنُوْنَ ﴿٤﴾ أُولٰٓئِكَ عَلٰى هُدًى مِّنْ رَّبِّهِمْ ۖ وَأُولٰٓئِكَ هُمُ الْمُفْلِحُوْنَ ﴿٥﴾',
+  r:'Alif lām mīm. Dzālikal-kitābu lā raiba fīh, hudal-lil-muttaqīn. Alladzīna yu’minūna bil-ghaibi wa yuqīmūnaṣ-ṣalāta wa mimmā razaqnāhum yunfiqūn. Walladzīna yu’minūna bimā unzila ilaika wa mā unzila min qablik, wa bil-ākhirati hum yūqinūn. Ulā’ika ‘alā hudam-mir-rabbihim wa ulā’ika humul-mufliḥūn.',
+  m:'Alif Lam Mim. Kitab Al-Quran ini tiada sebarang keraguan padanya; ia petunjuk bagi orang yang bertakwa, iaitu orang yang beriman kepada perkara ghaib, mendirikan solat dan membelanjakan sebahagian rezeki yang Kami berikan kepada mereka; dan orang yang beriman kepada apa yang diturunkan kepadamu dan apa yang diturunkan sebelummu, serta yakin akan hari akhirat. Mereka itulah yang mendapat petunjuk daripada Tuhan mereka, dan merekalah orang yang berjaya.'},
+ {t:'Surah Al-Baqarah, ayat 255–257',n:'Ayat al-Kursi dan dua ayat selepasnya',c:1,
+  ar:WIRID[5].ar+' ﴿٢٥٥﴾ لَآ إِكْرَاهَ فِى الدِّيْنِ ۖ قَدْ تَّبَيَّنَ الرُّشْدُ مِنَ الْغَيِّ ۚ فَمَنْ يَّكْفُرْ بِالطَّاغُوْتِ وَيُؤْمِنْ بِاللّٰهِ فَقَدِ اسْتَمْسَكَ بِالْعُرْوَةِ الْوُثْقٰى لَا انْفِصَامَ لَهَا ۗ وَاللّٰهُ سَمِيْعٌ عَلِيْمٌ ﴿٢٥٦﴾ اَللّٰهُ وَلِيُّ الَّذِيْنَ اٰمَنُوْا يُخْرِجُهُمْ مِّنَ الظُّلُمٰتِ إِلَى النُّوْرِ ۖ وَالَّذِيْنَ كَفَرُوْٓا أَوْلِيٰٓؤُهُمُ الطَّاغُوْتُ يُخْرِجُوْنَهُمْ مِّنَ النُّوْرِ إِلَى الظُّلُمٰتِ ۗ أُولٰٓئِكَ أَصْحٰبُ النَّارِ ۖ هُمْ فِيْهَا خٰلِدُوْنَ ﴿٢٥٧﴾',
+  r:WIRID[5].r+' Lā ikrāha fid-dīn, qat tabayyanar-rusydu minal-ghayy, fa may yakfur biṭ-ṭāghūti wa yu’mim billāhi fa qadistamsaka bil-‘urwatil-wutsqā lan-fiṣāma lahā, wallāhu samī‘un ‘alīm. Allāhu waliyyul-ladzīna āmanū yukhrijuhum minaẓ-ẓulumāti ilan-nūr, walladzīna kafarū auliyā’uhumuṭ-ṭāghūtu yukhrijūnahum minan-nūri ilaẓ-ẓulumāt, ulā’ika aṣḥābun-nār, hum fīhā khālidūn.',
+  m:WIRID[5].m+' Tiada paksaan dalam agama; sesungguhnya telah jelas jalan yang benar daripada jalan yang sesat. Sesiapa yang mengingkari taghut dan beriman kepada Allah, maka dia telah berpegang pada tali yang teguh yang tidak akan putus. Allah Maha Mendengar lagi Maha Mengetahui. Allah pelindung orang yang beriman; Dia mengeluarkan mereka daripada kegelapan kepada cahaya. Orang yang kafir pula, pelindung mereka ialah taghut yang mengeluarkan mereka daripada cahaya kepada kegelapan. Mereka itulah ahli neraka, kekal di dalamnya.'},
+ {t:'Surah Al-Baqarah, ayat 284–286',c:1,
+  ar:'لِلّٰهِ مَا فِى السَّمٰوٰتِ وَمَا فِى الْأَرْضِ ۗ وَإِنْ تُبْدُوْا مَا فِيْٓ أَنْفُسِكُمْ أَوْ تُخْفُوْهُ يُحَاسِبْكُمْ بِهِ اللّٰهُ ۖ فَيَغْفِرُ لِمَنْ يَّشَآءُ وَيُعَذِّبُ مَنْ يَّشَآءُ ۗ وَاللّٰهُ عَلٰى كُلِّ شَيْءٍ قَدِيْرٌ ﴿٢٨٤﴾ اٰمَنَ الرَّسُوْلُ بِمَآ أُنْزِلَ إِلَيْهِ مِنْ رَّبِّهِ وَالْمُؤْمِنُوْنَ ۚ كُلٌّ اٰمَنَ بِاللّٰهِ وَمَلٰٓئِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ ۚ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّنْ رُّسُلِهِ ۚ وَقَالُوْا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيْرُ ﴿٢٨٥﴾ لَا يُكَلِّفُ اللّٰهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَآ إِنْ نَّسِيْنَآ أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَآ إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِيْنَ مِنْ قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۚ وَاعْفُ عَنَّا ۗ وَاغْفِرْ لَنَا ۗ وَارْحَمْنَا ۚ أَنْتَ مَوْلٰىنَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكٰفِرِيْنَ ﴿٢٨٦﴾',
+  r:'Lillāhi mā fis-samāwāti wa mā fil-arḍ, wa in tubdū mā fī anfusikum au tukhfūhu yuḥāsibkum bihillāh, fa yaghfiru limay yasyā’u wa yu‘adzdzibu may yasyā’, wallāhu ‘alā kulli syai’in qadīr. Āmanar-rasūlu bimā unzila ilaihi mir-rabbihī wal-mu’minūn, kullun āmana billāhi wa malā’ikatihī wa kutubihī wa rusulih, lā nufarriqu baina aḥadim-mir-rusulih, wa qālū sami‘nā wa aṭa‘nā ghufrānaka rabbanā wa ilaikal-maṣīr. Lā yukallifullāhu nafsan illā wus‘ahā, lahā mā kasabat wa ‘alaihā maktasabat, rabbanā lā tu’ākhidznā in nasīnā au akhṭa’nā, rabbanā wa lā taḥmil ‘alainā iṣran kamā ḥamaltahū ‘alal-ladzīna min qablinā, rabbanā wa lā tuḥammilnā mā lā ṭāqata lanā bih, wa‘fu ‘annā, waghfir lanā, warḥamnā, anta maulānā fanṣurnā ‘alal-qaumil-kāfirīn.',
+  m:'Milik Allah segala yang ada di langit dan di bumi. Jika kamu menyatakan apa yang ada dalam hatimu atau menyembunyikannya, nescaya Allah akan menghisabnya; lalu Dia mengampuni sesiapa yang Dia kehendaki dan mengazab sesiapa yang Dia kehendaki. Allah Maha Berkuasa atas segala sesuatu. Rasul telah beriman kepada apa yang diturunkan kepadanya daripada Tuhannya, demikian juga orang yang beriman. Semuanya beriman kepada Allah, malaikat-malaikat-Nya, kitab-kitab-Nya dan rasul-rasul-Nya. (Mereka berkata:) “Kami tidak membeza-bezakan antara seorang pun daripada rasul-rasul-Nya. Kami dengar dan kami taat. Kami memohon keampunan-Mu wahai Tuhan kami, dan kepada-Mulah tempat kembali.” Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya. Dia mendapat pahala daripada kebaikan yang diusahakannya dan menanggung dosa daripada kejahatan yang dilakukannya. “Wahai Tuhan kami, janganlah Engkau hukum kami jika kami lupa atau tersalah. Wahai Tuhan kami, janganlah Engkau bebankan kami dengan beban yang berat sebagaimana Engkau bebankan kepada orang sebelum kami. Wahai Tuhan kami, janganlah Engkau pikulkan kepada kami apa yang tidak terdaya kami memikulnya. Maafkanlah kami, ampunilah kami dan rahmatilah kami. Engkaulah Pelindung kami, maka tolonglah kami menghadapi kaum yang kafir.”'},
+ {t:'Surah Al-Ikhlas',c:3,ar:WIRID[6].ar,r:WIRID[6].r,m:WIRID[6].m},
+ {t:'Surah Al-Falaq',c:3,ar:WIRID[7].ar,r:WIRID[7].r,m:WIRID[7].m},
+ {t:'Surah An-Nas',c:3,ar:WIRID[8].ar,r:WIRID[8].r,m:WIRID[8].m},
+ {t:'Kerajaan Milik Allah',c:1,src:'Riwayat Muslim (Abdullah bin Mas‘ud) & Abu Daud',
+  ar:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلّٰهِ، وَالْحَمْدُ لِلّٰهِ، لَا شَرِيْكَ لَهُ، لَآ إِلٰهَ إِلَّا هُوَ، وَإِلَيْهِ النُّشُوْرُ',
+  arE:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلّٰهِ، وَالْحَمْدُ لِلّٰهِ، لَا شَرِيْكَ لَهُ، لَآ إِلٰهَ إِلَّا هُوَ، وَإِلَيْهِ الْمَصِيْرُ',
+  r:'Aṣbaḥnā wa aṣbaḥal-mulku lillāh, wal-ḥamdu lillāh, lā syarīka lah, lā ilāha illā huwa wa ilaihin-nusyūr.',
+  rE:'Amsainā wa amsal-mulku lillāh, wal-ḥamdu lillāh, lā syarīka lah, lā ilāha illā huwa wa ilaihil-maṣīr.',
+  m:'Kami berpagi dan kerajaan pun berpagi milik Allah. Segala puji bagi Allah, tiada sekutu bagi-Nya, tiada Tuhan melainkan Dia, dan kepada-Nya kebangkitan.',
+  mE:'Kami berpetang dan kerajaan pun berpetang milik Allah. Segala puji bagi Allah, tiada sekutu bagi-Nya, tiada Tuhan melainkan Dia, dan kepada-Nya tempat kembali.'},
+ {t:'Di atas Fitrah Islam',c:1,src:'Riwayat Ahmad (Abdurrahman bin Abza)',
+  ar:'أَصْبَحْنَا عَلٰى فِطْرَةِ الْإِسْلَامِ، وَعَلٰى كَلِمَةِ الْإِخْلَاصِ، وَعَلٰى دِيْنِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلٰى مِلَّةِ أَبِيْنَا إِبْرَاهِيْمَ حَنِيْفًا مُّسْلِمًا وَّمَا كَانَ مِنَ الْمُشْرِكِيْنَ',
+  arE:'أَمْسَيْنَا عَلٰى فِطْرَةِ الْإِسْلَامِ، وَعَلٰى كَلِمَةِ الْإِخْلَاصِ، وَعَلٰى دِيْنِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلٰى مِلَّةِ أَبِيْنَا إِبْرَاهِيْمَ حَنِيْفًا مُّسْلِمًا وَّمَا كَانَ مِنَ الْمُشْرِكِيْنَ',
+  r:'Aṣbaḥnā ‘alā fiṭratil-islām, wa ‘alā kalimatil-ikhlāṣ, wa ‘alā dīni nabiyyinā Muḥammadin ṣallallāhu ‘alaihi wa sallam, wa ‘alā millati abīnā Ibrāhīma ḥanīfam-muslimaw-wa mā kāna minal-musyrikīn.',
+  rE:'Amsainā ‘alā fiṭratil-islām, wa ‘alā kalimatil-ikhlāṣ, wa ‘alā dīni nabiyyinā Muḥammadin ṣallallāhu ‘alaihi wa sallam, wa ‘alā millati abīnā Ibrāhīma ḥanīfam-muslimaw-wa mā kāna minal-musyrikīn.',
+  m:'Kami berpagi di atas fitrah Islam, di atas kalimah ikhlas, di atas agama nabi kami Muhammad ﷺ, dan di atas ajaran bapa kami Ibrahim yang lurus lagi berserah diri, dan dia bukanlah daripada golongan musyrikin.',
+  mE:'Kami berpetang di atas fitrah Islam, di atas kalimah ikhlas, di atas agama nabi kami Muhammad ﷺ, dan di atas ajaran bapa kami Ibrahim yang lurus lagi berserah diri, dan dia bukanlah daripada golongan musyrikin.'},
+ {t:'Nikmat, Kesejahteraan & Perlindungan',c:3,
+  ar:'اَللّٰهُمَّ إِنِّيْ أَصْبَحْتُ مِنْكَ فِيْ نِعْمَةٍ وَّعَافِيَةٍ وَّسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِى الدُّنْيَا وَالْاٰخِرَةِ',
+  arE:'اَللّٰهُمَّ إِنِّيْ أَمْسَيْتُ مِنْكَ فِيْ نِعْمَةٍ وَّعَافِيَةٍ وَّسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِى الدُّنْيَا وَالْاٰخِرَةِ',
+  r:'Allāhumma innī aṣbaḥtu minka fī ni‘matiw-wa ‘āfiyatiw-wa sitr, fa atimma ni‘mataka ‘alayya wa ‘āfiyataka wa sitraka fid-dunyā wal-ākhirah.',
+  rE:'Allāhumma innī amsaitu minka fī ni‘matiw-wa ‘āfiyatiw-wa sitr, fa atimma ni‘mataka ‘alayya wa ‘āfiyataka wa sitraka fid-dunyā wal-ākhirah.',
+  m:'Ya Allah, sesungguhnya aku berpagi dalam nikmat, kesejahteraan dan perlindungan daripada-Mu, maka sempurnakanlah nikmat-Mu, kesejahteraan-Mu dan perlindungan-Mu ke atasku di dunia dan di akhirat.',
+  mE:'Ya Allah, sesungguhnya aku berpetang dalam nikmat, kesejahteraan dan perlindungan daripada-Mu, maka sempurnakanlah nikmat-Mu, kesejahteraan-Mu dan perlindungan-Mu ke atasku di dunia dan di akhirat.'},
+ {t:'Syukur atas Nikmat',c:1,src:'Riwayat Abu Daud (Abdullah bin Ghannam)',
+  ar:'اَللّٰهُمَّ مَآ أَصْبَحَ بِيْ مِنْ نِّعْمَةٍ أَوْ بِأَحَدٍ مِّنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيْكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ',
+  arE:'اَللّٰهُمَّ مَآ أَمْسٰى بِيْ مِنْ نِّعْمَةٍ أَوْ بِأَحَدٍ مِّنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيْكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ',
+  r:'Allāhumma mā aṣbaḥa bī min ni‘matin au bi’aḥadim-min khalqika fa minka waḥdaka lā syarīka lak, fa lakal-ḥamdu wa lakasy-syukr.',
+  rE:'Allāhumma mā amsā bī min ni‘matin au bi’aḥadim-min khalqika fa minka waḥdaka lā syarīka lak, fa lakal-ḥamdu wa lakasy-syukr.',
+  m:'Ya Allah, apa sahaja nikmat yang ada padaku atau pada sesiapa daripada makhluk-Mu pada pagi ini, maka ia daripada-Mu semata-mata, tiada sekutu bagi-Mu. Maka bagi-Mu segala pujian dan bagi-Mu segala kesyukuran.',
+  mE:'Ya Allah, apa sahaja nikmat yang ada padaku atau pada sesiapa daripada makhluk-Mu pada petang ini, maka ia daripada-Mu semata-mata, tiada sekutu bagi-Mu. Maka bagi-Mu segala pujian dan bagi-Mu segala kesyukuran.',
+  f:'Sesiapa membacanya, dia telah menunaikan kesyukuran harinya (atau malamnya).'},
+ {t:'Pujian yang Layak bagi Allah',c:3,
+  ar:'يَا رَبِّ لَكَ الْحَمْدُ كَمَا يَنْبَغِيْ لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ',
+  r:'Yā rabbi lakal-ḥamdu kamā yanbaghī lijalāli wajhika wa ‘aẓīmi sulṭānik.',
+  m:'Wahai Tuhanku, bagi-Mu segala pujian sebagaimana yang layak bagi keagungan wajah-Mu dan kebesaran kekuasaan-Mu.'},
+ {t:'Reda kepada Allah, Islam & Rasul',c:3,src:'Riwayat Abu Daud & at-Tirmizi',
+  ar:'رَضِيْتُ بِاللّٰهِ رَبًّا، وَبِالْإِسْلَامِ دِيْنًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا وَّرَسُوْلًا',
+  r:'Raḍītu billāhi rabbā, wa bil-islāmi dīnā, wa bi Muḥammadin ṣallallāhu ‘alaihi wa sallama nabiyyaw-wa rasūlā.',
+  m:'Aku reda Allah sebagai Tuhan, Islam sebagai agama, dan Muhammad ﷺ sebagai nabi dan rasul.',
+  f:'Menjadi hak Allah untuk meredainya pada hari kiamat.'},
+ {t:'Tasbih Seluas Makhluk',c:3,src:'Riwayat Muslim (Juwairiyah)',
+  ar:'سُبْحَانَ اللّٰهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ',
+  r:'Subḥānallāhi wa biḥamdih, ‘adada khalqih, wa riḍā nafsih, wa zinata ‘arsyih, wa midāda kalimātih.',
+  m:'Maha Suci Allah dan dengan memuji-Nya, sebanyak bilangan makhluk-Nya, sebanyak keredaan diri-Nya, seberat timbangan ‘Arasy-Nya dan sebanyak tinta kalimah-Nya.'},
+ {t:'Perlindungan dengan Nama Allah',c:3,src:'Riwayat Abu Daud & at-Tirmizi (Uthman bin ‘Affan)',
+  ar:'بِسْمِ اللّٰهِ الَّذِيْ لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِى الْأَرْضِ وَلَا فِى السَّمَآءِ وَهُوَ السَّمِيْعُ الْعَلِيْمُ',
+  r:'Bismillāhil-ladzī lā yaḍurru ma‘asmihī syai’un fil-arḍi wa lā fis-samā’, wa huwas-samī‘ul-‘alīm.',
+  m:'Dengan nama Allah yang tidak akan memudaratkan bersama nama-Nya sesuatu pun di bumi dan di langit, dan Dialah Yang Maha Mendengar lagi Maha Mengetahui.',
+  f:'Tidak akan ditimpa mudarat yang datang secara tiba-tiba.'},
+ {t:'Berlindung daripada Syirik',c:3,src:'Riwayat Ahmad (Abu Musa al-Asy‘ari)',
+  ar:'اَللّٰهُمَّ إِنَّا نَعُوْذُ بِكَ مِنْ أَنْ نُّشْرِكَ بِكَ شَيْئًا نَّعْلَمُهُ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ',
+  r:'Allāhumma innā na‘ūdzu bika min an nusyrika bika syai’an na‘lamuh, wa nastaghfiruka limā lā na‘lamuh.',
+  m:'Ya Allah, kami berlindung kepada-Mu daripada menyekutukan-Mu dengan sesuatu yang kami ketahui, dan kami memohon ampun kepada-Mu atas apa yang tidak kami ketahui.'},
+ {t:'Kalimah Allah yang Sempurna',c:3,src:'Riwayat Muslim (Khaulah binti Hakim)',
+  ar:'أَعُوْذُ بِكَلِمَاتِ اللّٰهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ',
+  r:'A‘ūdzu bikalimātillāhit-tāmmāti min syarri mā khalaq.',
+  m:'Aku berlindung dengan kalimah-kalimah Allah yang sempurna daripada kejahatan makhluk yang Dia ciptakan.'},
+ {t:'Berlindung daripada Gelisah & Hutang',c:3,src:'Riwayat al-Bukhari (Anas) & Abu Daud',
+  ar:'اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوْذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوْذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوْذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ',
+  r:'Allāhumma innī a‘ūdzu bika minal-hammi wal-ḥazan, wa a‘ūdzu bika minal-‘ajzi wal-kasal, wa a‘ūdzu bika minal-jubni wal-bukhl, wa a‘ūdzu bika min ghalabatid-daini wa qahrir-rijāl.',
+  m:'Ya Allah, aku berlindung kepada-Mu daripada rasa gelisah dan dukacita, daripada lemah dan malas, daripada pengecut dan kedekut, dan daripada belenggu hutang serta penindasan manusia.'},
+ {t:'Memohon Kesejahteraan Tubuh',c:3,src:'Riwayat Abu Daud (Abu Bakrah)',
+  ar:'اَللّٰهُمَّ عَافِنِيْ فِيْ بَدَنِيْ، اَللّٰهُمَّ عَافِنِيْ فِيْ سَمْعِيْ، اَللّٰهُمَّ عَافِنِيْ فِيْ بَصَرِيْ، لَآ إِلٰهَ إِلَّا أَنْتَ',
+  r:'Allāhumma ‘āfinī fī badanī, Allāhumma ‘āfinī fī sam‘ī, Allāhumma ‘āfinī fī baṣarī, lā ilāha illā ant.',
+  m:'Ya Allah, sejahterakanlah tubuh badanku. Ya Allah, sejahterakanlah pendengaranku. Ya Allah, sejahterakanlah penglihatanku. Tiada Tuhan melainkan Engkau.'},
+ {t:'Berlindung daripada Kufur & Fakir',c:3,src:'Riwayat Abu Daud (Abu Bakrah)',
+  ar:'اَللّٰهُمَّ إِنِّيْ أَعُوْذُ بِكَ مِنَ الْكُفْرِ وَالْفَقْرِ، وَأَعُوْذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، لَآ إِلٰهَ إِلَّا أَنْتَ',
+  r:'Allāhumma innī a‘ūdzu bika minal-kufri wal-faqr, wa a‘ūdzu bika min ‘adzābil-qabr, lā ilāha illā ant.',
+  m:'Ya Allah, aku berlindung kepada-Mu daripada kekufuran dan kefakiran, dan aku berlindung kepada-Mu daripada azab kubur. Tiada Tuhan melainkan Engkau.'},
+ {t:'Sayyidul Istighfar',c:1,src:'Riwayat al-Bukhari (Syaddad bin Aus)',
+  ar:'اَللّٰهُمَّ أَنْتَ رَبِّيْ لَآ إِلٰهَ إِلَّا أَنْتَ، خَلَقْتَنِيْ وَأَنَا عَبْدُكَ، وَأَنَا عَلٰى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوْذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوْءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوْءُ بِذَنْبِيْ فَاغْفِرْ لِيْ، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوْبَ إِلَّا أَنْتَ',
+  r:'Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana ‘abduk, wa ana ‘alā ‘ahdika wa wa‘dika mastaṭa‘t, a‘ūdzu bika min syarri mā ṣana‘t, abū’u laka bini‘matika ‘alayya, wa abū’u bidzanbī faghfir lī, fa innahū lā yaghfirudz-dzunūba illā ant.',
+  m:'Ya Allah, Engkaulah Tuhanku, tiada Tuhan melainkan Engkau. Engkau menciptakan aku dan aku hamba-Mu. Aku berpegang pada janji dan ikrarku kepada-Mu sedaya upayaku. Aku berlindung kepada-Mu daripada keburukan perbuatanku. Aku mengakui nikmat-Mu kepadaku dan aku mengakui dosaku, maka ampunilah aku; sesungguhnya tiada yang mengampunkan dosa melainkan Engkau.',
+  f:'Sesiapa membacanya dengan yakin pada waktu siang lalu meninggal sebelum petang, dia ahli syurga; demikian juga jika dibaca pada waktu malam.'},
+ {t:'Selawat ke atas Nabi ﷺ',c:10,src:'Riwayat at-Tabarani (Abu ad-Darda’)',
+  ar:'اَللّٰهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَّعَلٰى اٰلِهِ وَصَحْبِهِ وَسَلِّمْ',
+  r:'Allāhumma ṣalli ‘alā sayyidinā Muḥammadin wa ‘alā ālihī wa ṣaḥbihī wa sallim.',
+  m:'Ya Allah, limpahkanlah selawat dan salam ke atas penghulu kami Muhammad, keluarga dan sahabat baginda.',
+  f:'Sesiapa berselawat sepuluh kali pada waktu pagi dan petang akan mendapat syafaat baginda pada hari kiamat.'},
+ {t:'Tasbih Kaffarah Majlis',c:1,src:'Riwayat at-Tirmizi (Abu Hurairah)',
+  ar:'سُبْحَانَكَ اللّٰهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَّآ إِلٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوْبُ إِلَيْكَ',
+  r:'Subḥānakallāhumma wa biḥamdik, asyhadu allā ilāha illā ant, astaghfiruka wa atūbu ilaik.',
+  m:'Maha Suci Engkau ya Allah dan dengan memuji-Mu. Aku bersaksi bahawa tiada Tuhan melainkan Engkau. Aku memohon ampun dan bertaubat kepada-Mu.'},
+ {t:'Doa Rabitah',c:1,n:'Doa penutup al-Ma’thurat',
+  ar:'اَللّٰهُمَّ إِنَّكَ تَعْلَمُ أَنَّ هٰذِهِ الْقُلُوْبَ قَدِ اجْتَمَعَتْ عَلٰى مَحَبَّتِكَ، وَالْتَقَتْ عَلٰى طَاعَتِكَ، وَتَوَحَّدَتْ عَلٰى دَعْوَتِكَ، وَتَعَاهَدَتْ عَلٰى نُصْرَةِ شَرِيْعَتِكَ، فَوَثِّقِ اللّٰهُمَّ رَابِطَتَهَا، وَأَدِمْ وُدَّهَا، وَاهْدِهَا سُبُلَهَا، وَامْلَأْهَا بِنُوْرِكَ الَّذِيْ لَا يَخْبُوْ، وَاشْرَحْ صُدُوْرَهَا بِفَيْضِ الْإِيْمَانِ بِكَ، وَجَمِيْلِ التَّوَكُّلِ عَلَيْكَ، وَأَحْيِهَا بِمَعْرِفَتِكَ، وَأَمِتْهَا عَلَى الشَّهَادَةِ فِيْ سَبِيْلِكَ، إِنَّكَ نِعْمَ الْمَوْلٰى وَنِعْمَ النَّصِيْرُ. اَللّٰهُمَّ اٰمِيْنَ، وَصَلِّ اللّٰهُمَّ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَّعَلٰى اٰلِهِ وَصَحْبِهِ وَسَلِّمْ',
+  r:'Allāhumma innaka ta‘lamu anna hādzihil-qulūba qadijtama‘at ‘alā maḥabbatik, waltaqat ‘alā ṭā‘atik, wa tawaḥḥadat ‘alā da‘watik, wa ta‘āhadat ‘alā nuṣrati syarī‘atik. Fa watstsiqillāhumma rābiṭatahā, wa adim wuddahā, wahdihā subulahā, wamla’hā binūrikal-ladzī lā yakhbū, wasyraḥ ṣudūrahā bifaiḍil-īmāni bik, wa jamīlit-tawakkuli ‘alaik, wa aḥyihā bima‘rifatik, wa amithā ‘alasy-syahādati fī sabīlik, innaka ni‘mal-maulā wa ni‘man-naṣīr. Allāhumma āmīn, wa ṣallillāhumma ‘alā sayyidinā Muḥammadin wa ‘alā ālihī wa ṣaḥbihī wa sallim.',
+  m:'Ya Allah, sesungguhnya Engkau mengetahui bahawa hati-hati ini telah berhimpun kerana cinta kepada-Mu, bertemu dalam ketaatan kepada-Mu, bersatu dalam dakwah-Mu dan berjanji setia untuk membela syariat-Mu. Maka kukuhkanlah ikatannya ya Allah, kekalkanlah kemesraannya, tunjukkanlah jalan-jalannya, penuhilah ia dengan cahaya-Mu yang tidak akan malap, lapangkanlah dadanya dengan limpahan iman kepada-Mu dan keindahan tawakal kepada-Mu, hidupkanlah ia dengan makrifat-Mu, dan matikanlah ia dalam syahid di jalan-Mu. Sesungguhnya Engkaulah sebaik-baik Pelindung dan sebaik-baik Penolong. Ya Allah, perkenankanlah. Limpahkanlah selawat dan salam ke atas penghulu kami Muhammad, keluarga dan sahabat baginda.'}
+];
+const PAGI=MATHURAT_ASAS.map(x=>({...x}));
+const PETANG=MATHURAT_ASAS.map(x=>({...x,ar:x.arE||x.ar,r:x.rE||x.r,m:x.mE||x.m}));
+
+/* ---------------- Kalendar Hijri ---------------- */
+const HIJRI_PENDEK=['Muh','Saf','R.Awal','R.Akhir','J.Awal','J.Akhir','Rej','Syb','Ram','Syw','Zkd','Zhj'];
+const PERISTIWA=[
+ [1,1,'Awal Muharram (Maal Hijrah)','besar'],[1,9,'Puasa sunat Tasu‘a','puasa'],[1,10,'Hari Asyura — puasa sunat','puasa'],
+ [3,12,'Maulidur Rasul','besar'],[7,27,'Israk dan Mikraj','besar'],[8,15,'Nisfu Syaaban','besar'],
+ [9,1,'Awal Ramadan','besar'],[9,17,'Nuzul Al-Quran','besar'],[10,1,'Hari Raya Aidilfitri','besar'],[10,2,'Hari Raya Aidilfitri (hari kedua)','besar'],
+ [12,9,'Hari Arafah — puasa sunat','puasa'],[12,10,'Hari Raya Aidiladha','besar'],[12,11,'Hari Tasyrik','tasyrik'],[12,12,'Hari Tasyrik','tasyrik'],[12,13,'Hari Tasyrik','tasyrik']];
+const HARI_PENDEK=['Ahd','Isn','Sel','Rab','Kha','Jum','Sab'];
+let hOffset=0, kal={y:0,m:0,sel:null};
+const monthData={}; // "y-m" -> prayers[]
+
+function parseH(h){const x=String(h||'').match(/(\d{4})-(\d{1,2})-(\d{1,2})/);return x?{y:+x[1],m:+x[2],d:+x[3]}:null}
+function intlH(ms){
+  try{const p=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{timeZone:'UTC',day:'numeric',month:'numeric',year:'numeric'}).formatToParts(new Date(ms)).map(x=>[x.type,x.value]));
+  return {y:parseInt(p.year),m:+p.month,d:+p.day}}catch(e){return null}
+}
+function rememberMonth(j){if(j&&j.prayers&&!j._offline)monthData[`${j.year}-${j.month_number}`]=j.prayers}
+function kiraOffset(){ // selaraskan Umm al-Qura dengan tarikh JAKIM hari ini
+  const t=todayRow(),api=t&&parseH(t.hijri);if(!api)return;
+  const {y,m,d}=klParts();
+  for(const k of [0,-1,1,-2,2]){const h=intlH(Date.UTC(y,m-1,d+k,12));if(h&&h.d===api.d&&h.m===api.m){hOffset=k;return}}
+}
+function hijriOf(y,m,d){
+  const md=monthData[`${y}-${m}`];
+  if(md){const r=md.find(x=>+x.day===d);const h=r&&parseH(r.hijri);if(h)return {...h,rasmi:true}}
+  const h=intlH(Date.UTC(y,m-1,d+hOffset,12));return h?{...h,rasmi:false}:null;
+}
+function peristiwaOf(h,dow){
+  if(!h)return[];const out=PERISTIWA.filter(([m,d])=>m===h.m&&d===h.d).map(([,,t,k])=>({t,k}));
+  const haram=(h.m===10&&h.d===1)||(h.m===12&&h.d>=10&&h.d<=13);
+  if(h.d>=13&&h.d<=15&&!haram&&h.m!==9)out.push({t:'Ayyamul Bidh — puasa sunat',k:'puasa'});
+  if((dow===1||dow===4)&&!haram&&h.m!==9)out.push({t:`Puasa sunat ${dow===1?'Isnin':'Khamis'}`,k:'sunat'});
+  if(h.m===9&&!out.some(e=>e.k==='besar'))out.push({t:`Ramadan hari ke-${h.d}`,k:'ramadan'});
+  return out;
+}
+async function ensureMonth(y,m){
+  const key=`${y}-${m}`;if(monthData[key])return;
+  const c=store.get(`cache_${state.zone}_${y}_${m}`,null);if(c){rememberMonth(c);return}
+  try{const r=await fetch(`${API}/v2/solat/${state.zone}?year=${y}&month=${m}`,{headers:{Accept:'application/json'}});
+    if(!r.ok)return;const j=await r.json();if(j.prayers&&j.prayers.length){store.set(`cache_${state.zone}_${y}_${m}`,j);rememberMonth(j)}}catch(e){}
+}
+function hLabel(h){return h?`${h.d} ${HIJRI[h.m-1]} ${h.y}H`:''}
+
+async function renderKal(){
+  if(!kal.y){const t=klParts();kal.y=t.y;kal.m=t.m}
+  const {y,m}=kal;drawKal();await ensureMonth(y,m);if(kal.y===y&&kal.m===m)drawKal();
+}
+function drawKal(){
+  const {y,m}=kal,t=klParts(),n=new Date(y,m,0).getDate(),first=new Date(Date.UTC(y,m-1,1)).getUTCDay();
+  const h1=hijriOf(y,m,1),hN=hijriOf(y,m,n);
+  $('kTajuk').textContent=`${BULAN[m-1]} ${y}`;
+  $('kHijri').textContent=h1&&hN?(h1.m===hN.m?`${HIJRI[h1.m-1]} ${h1.y}H`:`${HIJRI[h1.m-1]}${h1.y!==hN.y?' '+h1.y+'H':''} – ${HIJRI[hN.m-1]} ${hN.y}H`):'';
+  let html=HARI_PENDEK.map((d,i)=>`<div class="kh ${i===5?'jum':''}">${d}</div>`).join('');
+  for(let i=0;i<first;i++)html+='<div></div>';
+  let adaAnggaran=false;
+  for(let d=1;d<=n;d++){
+    const h=hijriOf(y,m,d),dow=(first+d-1)%7,ev=peristiwaOf(h,dow);if(h&&!h.rasmi)adaAnggaran=true;
+    const today=y===t.y&&m===t.m&&d===t.d, sel=kal.sel===d;
+    const dots=[...new Set(ev.map(e=>e.k))].filter(k=>k!=='ramadan').map(k=>`<i class="dot ${k}"></i>`).join('');
+    html+=`<button class="kd ${today?'today':''} ${sel?'sel':''} ${h&&h.m===9?'ram':''} ${dow===5?'jum':''} ${ev.some(e=>e.k==='besar')?'besar':''}" data-d="${d}">
+      <span class="g">${d}</span><span class="h">${h?(h.d===1?`<b>1 ${HIJRI_PENDEK[h.m-1]}</b>`:h.d):''}</span><span class="dots">${dots}</span></button>`;
+  }
+  $('kGrid').innerHTML=html;
+  $('kNota').textContent=adaAnggaran?'Sebahagian tarikh Hijri bulan ini ialah anggaran (kalendar Umm al-Qura diselaraskan dengan JAKIM) dan mungkin berbeza ±1 hari.':'Tarikh Hijri bulan ini mengikut takwim JAKIM.';
+  drawDetail();drawAkan();
+}
+function drawDetail(){
+  const {y,m}=kal,t=klParts();const d=kal.sel||((y===t.y&&m===t.m)?t.d:null);
+  if(!d){$('kDetail').innerHTML='<p class="k-kosong">Ketik mana-mana tarikh untuk melihat butiran.</p>';return}
+  const dow=new Date(Date.UTC(y,m-1,d)).getUTCDay(),h=hijriOf(y,m,d),ev=peristiwaOf(h,dow);
+  const md=monthData[`${y}-${m}`],r=md&&md.find(x=>+x.day===d);
+  const f=ts=>new Date(ts*1000).toLocaleTimeString('en-GB',{timeZone:TZ,hour:'2-digit',minute:'2-digit'});
+  $('kDetail').innerHTML=`<div class="kd-tarikh">${HARI[dow]}, ${d} ${BULAN[m-1]} ${y}</div>
+    <div class="kd-hijri">${hLabel(h)}${h&&!h.rasmi?' <small>(anggaran)</small>':''}</div>
+    ${ev.length?`<ul class="kd-ev">${ev.map(e=>`<li class="${e.k}">${e.t}</li>`).join('')}</ul>`:''}
+    ${r?`<div class="kd-waktu">${[['Subuh',r.fajr],['Zohor',r.dhuhr],['Asar',r.asr],['Maghrib',r.maghrib],['Isyak',r.isha]].map(([n,v])=>`<div><span>${n}</span><b>${f(v)}</b></div>`).join('')}</div>`:''}`;
+}
+function drawAkan(){
+  const t=klParts(),out=[];
+  for(let i=0;i<420&&out.length<8;i++){
+    const dt=new Date(Date.UTC(t.y,t.m-1,t.d+i)),y=dt.getUTCFullYear(),m=dt.getUTCMonth()+1,d=dt.getUTCDate();
+    const h=hijriOf(y,m,d);if(!h)continue;
+    PERISTIWA.filter(([pm,pd,,k])=>pm===h.m&&pd===h.d&&k!=='tasyrik'&&!(pm===10&&pd===2)).forEach(([,,nm,k])=>out.push({nm,k,y,m,d,h,i}));
+  }
+  $('kAkan').innerHTML=out.map(e=>`<li class="${e.k}"><div><b>${e.nm}</b><span>${e.d} ${BULAN[e.m-1]} ${e.y} · ${hLabel(e.h)}</span></div><em>${e.i===0?'Hari ini':e.i===1?'Esok':e.i+' hari lagi'}</em></li>`).join('');
+}
+
+const SEC={wirid:{items:WIRID,count:true},sunnah:{items:SUNNAH,count:true},pagi:{items:PAGI,count:true},petang:{items:PETANG,count:true},dalam:{items:DALAM,count:false}};
 const cntKey=()=>{const {y,m,d}=klParts();return `${y}-${m}-${d}`};
 let counts=store.get('counts2',{});
 if(counts._day!==cntKey())counts={_day:cntKey(),wirid:{},sunnah:{}};
@@ -703,7 +993,7 @@ document.addEventListener('click',e=>{
   }
   if(rs){const s=rs.dataset.s,i=+rs.dataset.reset;counts[s]=counts[s]||{};counts[s][i]=0;updW(s,i);updAll(s);store.set('counts2',counts)}
 });
-$('resetAll').onclick=()=>{const v=curView;if(!SEC[v]||!SEC[v].count)return;counts[v]={};SEC[v].items.forEach((_,i)=>updW(v,i));updAll(v);store.set('counts2',counts);window.scrollTo({top:0,behavior:'smooth'})};
+$('resetAll').onclick=()=>{const v=activeSec();if(!SEC[v]||!SEC[v].count)return;counts[v]={};SEC[v].items.forEach((_,i)=>updW(v,i));updAll(v);store.set('counts2',counts);window.scrollTo({top:0,behavior:'smooth'})};
 
 /* tetapan paparan */
 let pref=store.get('pref',{rumi:true,maksud:true,ar:1.9});
@@ -718,17 +1008,34 @@ $('fPlus').onclick=()=>{pref.ar=Math.min(3.2,+(pref.ar+0.2).toFixed(1));applyPre
 $('fMinus').onclick=()=>{pref.ar=Math.max(1.3,+(pref.ar-0.2).toFixed(1));applyPref()};
 
 /* ---------------- Navigasi ---------------- */
-const VIEWS=['solat','azan','wirid','sunnah','dalam'];
-let curView='solat';
+const VIEWS=['solat','azan','wirid','sunnah','dalam','kalendar'];
+let curView='solat',curZikir='sunnah';
+const activeSec=()=>curView==='sunnah'?curZikir:curView;
+function setZikir(z){
+  curZikir=z;
+  document.querySelectorAll('#segZikir button').forEach(b=>b.classList.toggle('on',b.dataset.z===z));
+  document.querySelectorAll('#v-sunnah .subv').forEach(x=>x.classList.toggle('on',x.dataset.z===z));
+  $('srcMathurat').style.display=z==='sunnah'?'none':'';
+}
 function show(v){
+  if(v==='pagi'||v==='petang'){setZikir(v);v='sunnah'}
   if(!VIEWS.includes(v))v='solat';curView=v;
   document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
-  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
-  $('toolbar').style.display=v==='solat'?'none':'';
-  $('resetAll').style.display=(SEC[v]&&SEC[v].count)?'':'none';
-  if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v||(v==='kalendar'&&b.dataset.v==='solat')));
+  $('toolbar').style.display=(v==='solat'||v==='kalendar')?'none':'';
+  const sec=activeSec();$('resetAll').style.display=(SEC[sec]&&SEC[sec].count)?'':'none';
+  const h=v==='sunnah'&&curZikir!=='sunnah'?curZikir:v;
+  if(location.hash!=='#'+h)history.replaceState(null,'','#'+h);
+  if(v==='kalendar'){kal.sel=null;renderKal()}
   window.scrollTo(0,0);
 }
+document.querySelectorAll('#segZikir button').forEach(b=>b.onclick=()=>{setZikir(b.dataset.z);show('sunnah')});
+$('bukaKal').onclick=()=>show('kalendar');
+$('kKembali').onclick=()=>show('solat');
+$('kPrev').onclick=()=>{kal.m--;if(kal.m<1){kal.m=12;kal.y--}kal.sel=null;renderKal()};
+$('kNext').onclick=()=>{kal.m++;if(kal.m>12){kal.m=1;kal.y++}kal.sel=null;renderKal()};
+$('kHariIni').onclick=()=>{const t=klParts();kal.y=t.y;kal.m=t.m;kal.sel=null;renderKal()};
+$('kGrid').addEventListener('click',e=>{const b=e.target.closest('.kd');if(!b)return;kal.sel=+b.dataset.d;drawKal()});
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.v));
 window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
 
