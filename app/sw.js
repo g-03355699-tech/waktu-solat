@@ -1,6 +1,6 @@
 // Waktu Solat & Wirid — simpan fail app untuk kegunaan luar talian.
-const CACHE = 'wsw-v1.3.0';
-const FAIL = ['./', './index.html', './manifest.json', './ikon-192.png', './ikon-512.png', './ikon-180.png', '../derma-qr.png'];
+const CACHE = 'wsw-v1.4.0';
+const FAIL = ['./', './index.html', './manifest.json', './ikon-192.png', './ikon-512.png', './ikon-180.png', '../derma-qr.png', './fon/amiri-quran.woff2'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FAIL)).then(() => self.skipWaiting()));

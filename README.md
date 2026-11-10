@@ -19,6 +19,7 @@ Web app percuma untuk melihat **waktu solat JAKIM** mengikut zon dan membaca **w
 - **Wirid** — bacaan wirid yang lazim di Malaysia dengan pembilang, serta doa selepas solat yang biasa dibaca imam
 - **Zikir** — zikir sunnah selepas solat berdasarkan hadis, serta al-Ma’thurat (Wazifah Sughra) pagi & petang
 - **Dalam Solat** — bacaan niat hingga salam mengikut turutan, beserta maksud
+- **Yasin & Tahlil** — Surah Yasin penuh (rumi, maksud, penanda bacaan), doa selepas Yasin, tahlil ringkas dan Doa Tahlil
 
 ## Sokong app ini ❤️
 
@@ -28,4 +29,4 @@ App ini percuma. Sumbangan melalui DuitNow QR (butang **Derma** dalam app) memba
 
 **Ibrahim bin Kadri** · WhatsApp [019-300 2591](https://wa.me/60193002591)
 
-Lesen [MIT](LICENSE)
+Kod: lesen [MIT](LICENSE). Teks Al-Quran (Rasm Uthmani) daripada [The Noble Qur’an Encyclopedia](https://quranenc.com) melalui pakej [quran-json](https://github.com/risan/quran-json) (CC BY-SA 4.0). Fon Amiri Quran: SIL Open Font License 1.1.
