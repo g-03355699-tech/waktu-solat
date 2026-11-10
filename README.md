@@ -15,7 +15,7 @@ Web app percuma untuk melihat **waktu solat JAKIM** mengikut zon dan membaca **w
 
 **Bacaan** (teks Arab, rumi & maksud; saiz huruf boleh diubah)
 - **Jawab Azan** — jawapan setiap lafaz azan, selawat dan doa selepas azan
-- **Wirid** — 15 bacaan wirid selepas solat yang lazim di Malaysia, dengan pembilang
+- **Wirid** — bacaan wirid yang lazim di Malaysia dengan pembilang, serta doa selepas solat yang biasa dibaca imam
 - **Zikir Sunnah** — zikir & doa selepas solat berdasarkan hadis, dengan sumber riwayat
 - **Dalam Solat** — bacaan niat hingga salam mengikut turutan, beserta maksud
 

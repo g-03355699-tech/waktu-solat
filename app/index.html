@@ -143,6 +143,9 @@ nav svg{width:18px;height:18px}
 .w-badges{display:flex;gap:6px;align-items:center;flex:none}
 .kali{font-size:.7rem;font-weight:700;background:rgba(217,180,106,.18);color:var(--gold2);padding:3px 8px;border-radius:99px}
 .subjudul{margin:22px 2px 0;font-size:1rem}
+.bahagian{margin:26px 2px 0;padding-top:16px;border-top:1px dashed var(--line)}
+.bahagian h3{font-size:1.1rem;color:var(--gold2)}
+.bahagian p{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:3px}
 .az .az-mu{background:var(--bg2);border-radius:14px;padding:10px 14px}
 .az .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;display:flex;justify-content:space-between;align-items:center}
 .az .lbl.jawab{color:var(--gold);margin-top:12px}
@@ -219,7 +222,7 @@ nav svg{width:20px;height:20px}
 
   <!-- ============ WIRID ============ -->
   <section class="view" id="v-wirid">
-    <div class="intro"><h2>Bacaan Wirid</h2><p>Susunan wirid selepas solat yang lazim diamalkan di masjid dan surau di Malaysia.</p></div>
+    <div class="intro"><h2>Bacaan Wirid</h2><p>Susunan wirid dan doa selepas solat yang lazim diamalkan di masjid dan surau di Malaysia.</p></div>
     <div class="progress-all"><i id="p-wirid"></i></div>
     <div class="pmeta" id="m-wirid"></div>
     <div id="l-wirid"></div>
@@ -489,10 +492,35 @@ const WIRID=[
   ar:'اَللّٰهُمَّ أَعِنِّيْ عَلٰى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ',
   r:'Allāhumma a‘innī ‘alā dzikrika wa syukrika wa ḥusni ‘ibādatik.',
   m:'Ya Allah, bantulah aku untuk mengingati-Mu, mensyukuri-Mu dan memperelok ibadahku kepada-Mu.'},
+ {h:'Doa Selepas Solat',hp:'Lazim dibaca oleh imam selepas wirid; makmum mengaminkan. Susunan dan lafaz mungkin berbeza sedikit antara masjid.',
+  t:'Pembukaan: Hamdalah & Selawat',c:1,
+  ar:'بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ، اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ، حَمْدًا يُّوَافِيْ نِعَمَهُ وَيُكَافِئُ مَزِيْدَهُ، يَا رَبَّنَا لَكَ الْحَمْدُ كَمَا يَنْبَغِيْ لِجَلَالِ وَجْهِكَ وَعَظِيْمِ سُلْطَانِكَ، اَللّٰهُمَّ صَلِّ عَلٰى سَيِّدِنَا مُحَمَّدٍ وَّعَلٰى اٰلِ سَيِّدِنَا مُحَمَّدٍ',
+  r:'Bismillāhir-raḥmānir-raḥīm. Alḥamdu lillāhi rabbil-‘ālamīn, ḥamday-yuwāfī ni‘amahū wa yukāfi’u mazīdah. Yā rabbanā lakal-ḥamdu kamā yanbaghī lijalāli wajhika wa ‘aẓīmi sulṭānik. Allāhumma ṣalli ‘alā sayyidinā Muḥammadin wa ‘alā āli sayyidinā Muḥammad.',
+  m:'Dengan nama Allah, Yang Maha Pemurah, lagi Maha Mengasihani. Segala puji bagi Allah, Tuhan sekalian alam, dengan pujian yang menyamai nikmat-nikmat-Nya dan menandingi tambahan kurniaan-Nya. Wahai Tuhan kami, bagi-Mu segala pujian sebagaimana yang layak bagi keagungan wajah-Mu dan kebesaran kekuasaan-Mu. Ya Allah, limpahkanlah selawat ke atas penghulu kami Muhammad dan ke atas keluarga penghulu kami Muhammad.'},
+ {t:'Doa Kesejahteraan Dunia & Akhirat',c:1,
+  ar:'اَللّٰهُمَّ إِنَّا نَسْأَلُكَ سَلَامَةً فِى الدِّيْنِ، وَعَافِيَةً فِى الْجَسَدِ، وَزِيَادَةً فِى الْعِلْمِ، وَبَرَكَةً فِى الرِّزْقِ، وَتَوْبَةً قَبْلَ الْمَوْتِ، وَرَحْمَةً عِنْدَ الْمَوْتِ، وَمَغْفِرَةً بَعْدَ الْمَوْتِ، اَللّٰهُمَّ هَوِّنْ عَلَيْنَا فِيْ سَكَرَاتِ الْمَوْتِ، وَالنَّجَاةَ مِنَ النَّارِ، وَالْعَفْوَ عِنْدَ الْحِسَابِ',
+  r:'Allāhumma innā nas’aluka salāmatan fid-dīn, wa ‘āfiyatan fil-jasad, wa ziyādatan fil-‘ilm, wa barakatan fir-rizq, wa taubatan qablal-maut, wa raḥmatan ‘indal-maut, wa maghfiratan ba‘dal-maut. Allāhumma hawwin ‘alainā fī sakarātil-maut, wan-najāta minan-nār, wal-‘afwa ‘indal-ḥisāb.',
+  m:'Ya Allah, kami memohon kepada-Mu keselamatan dalam agama, kesihatan tubuh badan, tambahan ilmu, keberkatan rezeki, taubat sebelum mati, rahmat ketika mati dan keampunan selepas mati. Ya Allah, ringankanlah kami ketika sakaratul maut, selamatkanlah kami daripada api neraka dan kurniakanlah kemaafan ketika hisab.'},
+ {t:'Doa Ketetapan Hati',n:'Surah Ali ‘Imran, ayat 8',c:1,
+  ar:'رَبَّنَا لَا تُزِغْ قُلُوْبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَّدُنْكَ رَحْمَةً ۚ إِنَّكَ أَنْتَ الْوَهَّابُ',
+  r:'Rabbanā lā tuzigh qulūbanā ba‘da idz hadaitanā wa hab lanā mil-ladunka raḥmah, innaka antal-wahhāb.',
+  m:'Wahai Tuhan kami, janganlah Engkau pesongkan hati kami selepas Engkau memberi petunjuk kepada kami, dan kurniakanlah kepada kami rahmat dari sisi-Mu; sesungguhnya Engkaulah Yang Maha Pemberi.'},
+ {t:'Doa Memohon Keampunan',n:'Surah Al-A‘raf, ayat 23',c:1,
+  ar:'رَبَّنَا ظَلَمْنَآ أَنْفُسَنَا وَإِنْ لَّمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُوْنَنَّ مِنَ الْخٰسِرِيْنَ',
+  r:'Rabbanā ẓalamnā anfusanā wa il-lam taghfir lanā wa tarḥamnā lanakūnanna minal-khāsirīn.',
+  m:'Wahai Tuhan kami, kami telah menzalimi diri kami sendiri. Jika Engkau tidak mengampuni dan merahmati kami, nescaya kami termasuk dalam golongan orang yang rugi.'},
+ {t:'Doa untuk Ibu Bapa & Kaum Muslimin',c:1,
+  ar:'رَبَّنَا اغْفِرْ لَنَا وَلِوَالِدِيْنَا وَلِجَمِيْعِ الْمُسْلِمِيْنَ وَالْمُسْلِمَاتِ، وَالْمُؤْمِنِيْنَ وَالْمُؤْمِنَاتِ، اَلْأَحْيَآءِ مِنْهُمْ وَالْأَمْوَاتِ',
+  r:'Rabbanaghfir lanā wa liwālidīnā wa lijamī‘il-muslimīna wal-muslimāt, wal-mu’minīna wal-mu’mināt, al-aḥyā’i minhum wal-amwāt.',
+  m:'Wahai Tuhan kami, ampunilah kami, kedua ibu bapa kami, dan seluruh muslimin dan muslimat, mukminin dan mukminat, yang masih hidup dan yang telah meninggal dunia.'},
  {t:'Doa Kebaikan Dunia dan Akhirat',n:'Surah Al-Baqarah, ayat 201',c:1,
   ar:'رَبَّنَآ اٰتِنَا فِى الدُّنْيَا حَسَنَةً وَّفِى الْاٰخِرَةِ حَسَنَةً وَّقِنَا عَذَابَ النَّارِ',
   r:'Rabbanā ātinā fid-dunyā ḥasanah, wa fil-ākhirati ḥasanah, wa qinā ‘adzāban-nār.',
-  m:'Wahai Tuhan kami, kurniakanlah kepada kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka.'}
+  m:'Wahai Tuhan kami, kurniakanlah kepada kami kebaikan di dunia dan kebaikan di akhirat, dan peliharalah kami daripada azab neraka.'},
+ {t:'Penutup Doa',n:'Surah As-Saffat, ayat 180–182',c:1,
+  ar:'سُبْحَانَ رَبِّكَ رَبِّ الْعِزَّةِ عَمَّا يَصِفُوْنَ، وَسَلٰمٌ عَلَى الْمُرْسَلِيْنَ، وَالْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ',
+  r:'Subḥāna rabbika rabbil-‘izzati ‘ammā yaṣifūn, wa salāmun ‘alal-mursalīn, wal-ḥamdu lillāhi rabbil-‘ālamīn.',
+  m:'Maha Suci Tuhanmu, Tuhan Yang Maha Perkasa, daripada apa yang mereka sifatkan. Salam sejahtera ke atas para rasul, dan segala puji bagi Allah, Tuhan sekalian alam.'}
 ];
 
 /* ---------------- Doa menjawab azan ---------------- */
@@ -642,7 +670,7 @@ function card(sec,w,i,count){
 }
 function renderLists(){
   for(const s in SEC){
-    $('l-'+s).innerHTML=SEC[s].items.map((w,i)=>card(s,w,i,SEC[s].count)).join('');
+    $('l-'+s).innerHTML=SEC[s].items.map((w,i)=>(w.h?`<div class="bahagian"><h3>${w.h}</h3>${w.hp?`<p>${w.hp}</p>`:''}</div>`:'')+card(s,w,i,SEC[s].count)).join('');
     if(SEC[s].count){SEC[s].items.forEach((_,i)=>updW(s,i));updAll(s)}
   }
   $('azanList').innerHTML=AZAN.map((a,i)=>`<article class="w az">
